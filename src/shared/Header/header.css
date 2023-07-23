@@ -1,0 +1,16 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary);
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, .25));
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 26px 52px;
+  margin: 0 auto;
+  max-width: 1440px;
+}

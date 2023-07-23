@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  width: 100%;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 0 0;
+  max-width: 205px;
+}
+
+.transaction {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.26px;
+}
+
+.date {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.26px;
+}
+
+.link {
+  display: inline-block;
+  padding: 16px 26px;
+  border-radius: 7px;
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.desc {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.16px;
+  color: var(--white);
+}

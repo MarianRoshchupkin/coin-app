@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+  --primary:         #116ACC;
+  --secondary1:      #182233;
+  --secondary2:      #B3CEE2;
+  --secondary3:      #D9DDE7;
+  --secondary4:      #FD4E5D;
+  --black:           #000000;
+  --grey1:           #1F2937;
+  --grey2:           #374151;
+  --grey3:           #4B5563;
+  --grey4:           #6B7280;
+  --grey5:           #9CA3AF;
+  --grey6:           #D1D5DB;
+  --grey7:           #F3F4F6;
+  --white:           #ffffff;
+  --info:            #A0C3FF;
+  --success:         #76CA66;
+  --warning:         #E2B93B;
+  --error:           #BA0000;
+  --background:      #E5E5E5;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', serif;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+* {
+  color: var(--black);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.notification {
+  position: fixed;
+  top: 144px;
+  right: 50px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+
+.info {
+  border: 1px solid var(--info);
+  background-color: rgba(160, 195, 255, .10000000149011612);
+}
+
+.infoText {
+  color: var(--info);
+}
+
+.success {
+  border: 1px solid var(--success);
+  background-color: rgba(118, 202, 102, .10000000149011612);
+}
+
+.successText {
+  color: var(--success);
+}
+
+.warning {
+  border: 1px solid var(--warning);
+  background-color: rgba(226, 185, 59, .10000000149011612);
+}
+
+.warningText {
+  color: var(--warning);
+}
+
+.error {
+  border: 1px solid var(--error);
+  background-color: rgba(186, 0, 0, .10000000149011612);
+}
+
+.errorText {
+  color: var(--error);
+}

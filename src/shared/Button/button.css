@@ -1,0 +1,20 @@
+.link {
+  display: flex;
+  align-items: center;
+  padding: 14px 25px;
+  margin: 0 0 0 auto;
+  border-radius: 7px;
+  background-color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.desc {
+  display: inline-block;
+  margin: 0 0 0 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.16px;
+  color: var(--white);
+}
