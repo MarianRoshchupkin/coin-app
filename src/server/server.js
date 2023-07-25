@@ -132,7 +132,7 @@ app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) 
   ));
 });
 
-app.post("/accounts/create-account", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
+app.post("/create-account", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const number = generateFifteenDigitNumber();
   const balance = generateFiveDigitNumber();
 
@@ -150,7 +150,7 @@ app.post("/accounts/create-account", auth(), bodyParser.urlencoded({ extended: f
   ));
 });
 
-app.post("/accounts/:number/transfer", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
+app.post("/transfer-funds", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { from, to, sum } = req.body;
 
   const [currentAccountSum] = await database('accounts')

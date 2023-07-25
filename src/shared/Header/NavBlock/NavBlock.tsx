@@ -5,7 +5,7 @@ export function NavBlock() {
   return (
     <ul className={styles.list}>
       <li className={styles.item}>
-        <a className={styles.link} href="/cash-machines">Банкоматы</a>
+        <a className={styles.link} href="/banks">Банкоматы</a>
       </li>
       <li className={styles.item}>
         <a className={styles.link} href="/accounts">Счета</a>

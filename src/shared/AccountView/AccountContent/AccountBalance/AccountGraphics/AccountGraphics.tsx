@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './accountgraphics.css';
-import { convertDataForSmallGraphics } from "../../../../../utils/conversion/convertDataForSmallGraphics";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
 interface IAccountGraphicsProps {
-  number: number;
+  data: any;
 }
 
-export function AccountGraphics({ number }: IAccountGraphicsProps) {
+export function AccountGraphics({ data }: IAccountGraphicsProps) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -16,7 +15,6 @@ export function AccountGraphics({ number }: IAccountGraphicsProps) {
     Tooltip
   );
 
-  const data = convertDataForSmallGraphics(number);
   const chartAreaBorder = {
     id: 'chartAreaBorder',
     beforeDraw(chart, args, options) {
@@ -48,7 +46,6 @@ export function AccountGraphics({ number }: IAccountGraphicsProps) {
         }
       },
       y: {
-        position: 'right',
         drawBorder: false,
         grid: {
           display: false,

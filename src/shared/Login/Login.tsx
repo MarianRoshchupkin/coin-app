@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './login.css';
-import { LoginHeader } from "./LoginHeader";
+import { Header } from "../Header";
 import { LoginForm } from "./LoginForm";
 
 interface IUserProps {
@@ -22,7 +22,7 @@ export function Login({ user }: ILoginProps) {
         </div>
       )}
 
-      <LoginHeader />
+      <Header navigation={false} />
       <LoginForm />
 
       <a className={styles.link} href='/signup'>Зарегестрироваться</a>

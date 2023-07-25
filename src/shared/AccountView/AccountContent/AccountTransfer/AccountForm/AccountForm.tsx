@@ -8,7 +8,7 @@ interface IAccountFormProps {
 
 export function AccountForm({ number }: IAccountFormProps) {
   return (
-    <form className={styles.form} method="post" action={`/accounts/${number}/transfer`} encType="application/x-www-form-urlencoded">
+    <form className={styles.form} method="post" action={`/transfer-funds`} encType="application/x-www-form-urlencoded">
       <input style={{ display: "none" }} type="text" name="from" value={number} />
       <label className={styles.label}>
         <span className={styles.desc}>Номер счёта получателя</span>

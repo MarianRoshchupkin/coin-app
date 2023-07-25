@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './main.global.css';
+import { hot } from 'react-hot-loader/root';
 import { Signup } from "./shared/Signup";
 import { Login } from "./shared/Login";
 import { Content } from "./shared/Content";
@@ -10,6 +11,7 @@ import { Accounts } from "./shared/Accounts";
 import { AccountView } from "./shared/AccountView";
 import { AccountDetails } from "./shared/AccountDetails";
 import { Currency } from "./shared/Currency";
+import { Banks } from "./shared/Banks";
 import { useUser } from "./hooks/useUser";
 import { Provider } from 'react-redux';
 import { rootReducer} from "./store/reducer";
@@ -49,7 +51,7 @@ function AppComponent() {
       {mounted && (
         <BrowserRouter>
           <Layout>
-            <Header />
+            <Header navigation={true} />
             <Content>
               <Routes>
                 {Object.keys(user).length === 0 && (
@@ -60,11 +62,12 @@ function AppComponent() {
                 <Route path='/' element={<Navigate to='/accounts' replace />} />
                 <Route path='/signup' element={<Navigate to='/accounts' replace />} />
                 <Route path='/accounts' element={<Accounts />} />
-                <Route path='/accounts/create-account' element={<Navigate to='/accounts' replace />} />
                 <Route path='/accounts/:number' element={<AccountView />} />
-                <Route path='/accounts/:number/transfer' element={<Navigate to='/accounts' replace />} />
                 <Route path='/accounts/:number/details' element={<AccountDetails />} />
                 <Route path='/currency' element={<Currency />} />
+                <Route path='/banks' element={<Banks />} />
+                <Route path='/create-account' element={<Navigate to='/accounts' replace />} />
+                <Route path='/transfer-funds' element={<Navigate to='/accounts' replace />} />
               </Routes>
             </Content>
           </Layout>
@@ -74,9 +77,9 @@ function AppComponent() {
   );
 }
 
-export const App = () =>
+export const App = hot(() =>
   <Provider store={store}>
     <Sprite />
     <AppComponent />
   </Provider>
-;
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './signup.css';
-import { SignupHeader } from "./SignupHeader";
+import { Header } from "../Header";
 import { SignupForm } from "./SignupForm";
 import { SignupButton } from "./SignupButton";
 
@@ -31,7 +31,7 @@ export function Signup({ user }: ISignupProps) {
         </div>
       )}
 
-      <SignupHeader />
+      <Header navigation={false} />
       <SignupButton />
       <SignupForm />
     </div>

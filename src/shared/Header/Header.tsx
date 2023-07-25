@@ -3,12 +3,18 @@ import styles from './header.css';
 import { Logo } from "./Logo";
 import { NavBlock } from "./NavBlock";
 
-export function Header() {
+interface IHeaderProps {
+  navigation: boolean
+}
+
+export function Header({ navigation }: IHeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
         <Logo />
-        <NavBlock />
+        {navigation && (
+          <NavBlock />
+        )}
       </div>
     </header>
   );

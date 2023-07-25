@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './accountcontent.css';
+import { filterTransactionsByAccount } from "../../../utils/filtration/filterTransactionsByAccount";
+import { AccountBalance } from "./AccountBalance"
 import { AccountTransactions } from "./AccountTransactions";
-import { AccountBalance } from "./AccountBalance";
 import { AccountHistory } from "./AccountHistory";
-import {filterTransactionsByAccount} from "../../../utils/filtration/filterTransactionsByAccount";
 
 interface IAccountContent {
   number: number;

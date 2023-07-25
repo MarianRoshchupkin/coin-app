@@ -7,7 +7,7 @@ export function CurrencyExchangeRate() {
   return (
     <div className={styles.container}>
       <Description text={'Изменение курсов в реальном времени'} />
-      <CurrenciesPairsList />
+      {/*<CurrenciesPairsList />*/}
     </div>
   );
 }

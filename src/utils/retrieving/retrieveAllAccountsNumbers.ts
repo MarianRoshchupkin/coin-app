@@ -6,7 +6,7 @@ export const retrieveAllAccountsNumbers = () => {
   const accountsNumber = accounts.map((account) => {
     return {
       id: account.id,
-      number: account.account
+      number: account.number
     }
   })
 
