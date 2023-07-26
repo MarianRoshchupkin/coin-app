@@ -8,11 +8,7 @@ export function AccountTextContent() {
   return (
     <div className={styles.container}>
       <Title title={'Просмотр счёта'} />
-      <Button
-        link={''}
-        icon={EIcons.outlinedArrowLeft}
-        text={'Вернуться назад'}
-      />
+      <Button link={''} text={'Вернуться назад'} />
     </div>
   );
 }

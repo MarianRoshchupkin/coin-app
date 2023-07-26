@@ -6,4 +6,17 @@
   border-radius: 50px;
   background-color: var(--grey7);
   text-decoration: none;
+  transition: all .3s ease;
+}
+
+.container:hover {
+  transform: scale(1.05);
+}
+
+.container:active {
+  transform: scale(1.05);
+}
+
+.container:focus {
+  transform: scale(1.05);
 }

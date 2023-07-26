@@ -3,9 +3,10 @@ import { mergeAccountsAndLastTransactions } from "../merger/mergeAccountAndLastT
 
 export const sortAccountsByAccount = () => {
   const accountsWithLastTransactions: IAccount[] = mergeAccountsAndLastTransactions();
+  console.log(accountsWithLastTransactions);
 
-  accountsWithLastTransactions.sort((elementOne, elementTwo) => {
-    return elementOne.number - elementTwo.number
+  accountsWithLastTransactions.sort((accountOne, accountTwo) => {
+    return accountOne.number - accountTwo.number
   })
 
   return accountsWithLastTransactions;

@@ -8,6 +8,7 @@
   border-radius: 7px;
   background-color: var(--primary);
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .desc {
@@ -18,4 +19,43 @@
   line-height: 20px;
   letter-spacing: -0.16px;
   color: var(--white);
+}
+
+.button:hover {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.button:hover .desc {
+  color: var(--primary);
+}
+
+.button:hover .icon path {
+  fill: var(--primary);
+}
+
+.button:active {
+  background-color: var(--primary);
+  outline: none;
+}
+
+.button:active .desc {
+  color: var(--white);
+}
+
+.button:active .icon path {
+  fill: var(--white);
+}
+
+.button:focus {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.button:focus .desc {
+  color: var(--primary);
+}
+
+.button:focus .icon path {
+  fill: var(--primary);
 }

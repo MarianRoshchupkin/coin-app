@@ -1,5 +1,8 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import styles from './dropdown.css';
+import { useSelector, useDispatch } from "react-redux";
+import { IInitialState } from "../../store/reducer";
+import { setDropdownSwitcher } from "../../store/dropdownSwitcher/dropdownSwitcherActions";
 
 interface IDropdownProps {
   button: ReactNode;
@@ -7,16 +10,17 @@ interface IDropdownProps {
 }
 
 export function Dropdown({ button, children }: IDropdownProps) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownSwitcher = useSelector<IInitialState, boolean>(state => state.dropdownSwitcher.dropdownSwitcher);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.container}>
-      <div onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+      <div onClick={() => dispatch(setDropdownSwitcher(!dropdownSwitcher))}>
         { button }
       </div>
-      {isDropdownOpen && (
+      {dropdownSwitcher && (
         <div className={styles.listContainer}>
-          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
+          <div className={styles.list} onClick={() => dispatch(setDropdownSwitcher(false))}>
             { children }
           </div>
         </div>

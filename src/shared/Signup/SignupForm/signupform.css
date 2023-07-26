@@ -42,6 +42,7 @@
   height: 44px;
   font-size: 18px;
   color: var(--grey4);
+  transition: all .3s ease;
 }
 
 .input::placeholder {
@@ -50,8 +51,19 @@
   color: var(--grey4);
 }
 
+.input:hover {
+  border: 1px solid var(--primary);
+  outline: none;
+}
+
+.input:active {
+  border: 1px solid var(--primary);
+  outline: none;
+}
+
 .input:focus {
-  outline: 1px solid var(--white);
+  border: 1px solid var(--primary);
+  outline: none;
 }
 
 .button {
@@ -67,4 +79,23 @@
   text-align: center;
   color: var(--white);
   background-color: var(--primary);
+  transition: all .3s ease;
+}
+
+.button:hover {
+  color: var(--primary);
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.button:active {
+  color: var(--white);
+  background-color: var(--primary);
+  outline: none;
+}
+
+.button:focus {
+  color: var(--primary);
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
 }

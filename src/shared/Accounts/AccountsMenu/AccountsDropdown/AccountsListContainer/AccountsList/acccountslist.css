@@ -9,28 +9,40 @@
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .25);
 }
 
-.item {
+.link {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 16px;
-}
-
-.item:hover {
-  background-color: #A0C3FF;
-}
-
-.link {
   width: 100%;
+  color: var(--grey2);
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.desc {
   font-size: 16px;
   font-weight: 400;
   font-style: normal;
   line-height: 24px;
   letter-spacing: -0.16px;
-  color: var(--grey2);
-  cursor: pointer;
 }
 
 .icon {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   margin: 0 0 0 10px;
+}
+
+.link:hover {
+  background-color: #A0C3FF;
+}
+
+.link:active {
+  background-color: #A0C3FF;
+}
+
+.link:focus {
+  background-color: #A0C3FF;
 }

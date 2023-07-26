@@ -9,7 +9,7 @@ export interface ITransaction {
   id: string;
   userId: string;
   sum: number;
-  date: string;
+  date: number;
   from: number;
   to: number;
 }

@@ -25,10 +25,26 @@
   height: 44px;
   font-size: 18px;
   color: var(--grey4);
+  transition: all .3s ease;
 }
 
 .input::placeholder {
   font-size: 16px;
   line-height: 24px;
   color: var(--grey4);
+}
+
+.input:hover {
+  border: 1px solid var(--primary);
+  outline: none;
+}
+
+.input:active {
+  border: 1px solid var(--primary);
+  outline: none;
+}
+
+.input:focus {
+  border: 1px solid var(--primary);
+  outline: none;
 }

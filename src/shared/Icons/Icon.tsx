@@ -19,7 +19,6 @@ export enum EIcons {
   outlinedAlarm = 'outlinedAlarmIcon',
   outlinedCalendar = 'outlinedCalendarIcon',
   outlinedMessage = 'outlinedMessageIcon',
-  outlinedMail = 'outlinedMailIcon',
   outlinedUser = 'outlinedUserIcon',
   outlinedWarning = 'outlinedWarningIcon',
   outlinedHelpCircle = 'outlinedHelpCircleIcon',
@@ -36,9 +35,7 @@ export enum EIcons {
   outlinedClose = 'outlineCloseIcon',
   outlinedHome = 'outlineHomeIcon',
   outlinedSlider = 'outlinedSliderIcon',
-  outlinedPlus = 'outlinedPlusIcon',
   outlinedGreenPlus = 'outlinedGreenPlusIcon',
-  outlinedArrowLeft = 'outlinedArrowLeftIcon',
   outlinedRuble = 'outlinedRubleIcon',
   outlinedGreenRuble = 'outlinedGreenRubleIcon',
   outlinedRedRuble = 'outlinedRedRubleIcon'

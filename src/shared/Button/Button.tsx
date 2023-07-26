@@ -1,17 +1,17 @@
 import React from 'react';
 import styles from './button.css';
-import { EIcons, Icon } from "../Icons/Icon";
 
 interface IButtonProps {
   link: string;
-  icon: EIcons;
   text: string;
 }
 
-export function Button({ link, icon, text }: IButtonProps) {
+export function Button({ link, text }: IButtonProps) {
   return (
     <a className={styles.link} href={`/${link}`}>
-      <Icon name={icon} size={24} />
+      <svg className={styles.icon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.83 11L11.41 7.41L10 6L4 12L10 18L11.41 16.59L7.83 13H20V11H7.83Z" fill="white"/>
+      </svg>
       <span className={styles.desc}>{ text }</span>
     </a>
   );

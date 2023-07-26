@@ -6,11 +6,7 @@ import { EIcons } from "../../Icons/Icon"
 export function SignupButton() {
   return (
     <div className={styles.container}>
-      <Button
-        link={''}
-        icon={EIcons.outlinedArrowLeft}
-        text={'Вернуться назад'}
-      />
+      <Button link={''} text={'Вернуться назад'} />
     </div>
   );
 }

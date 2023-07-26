@@ -7,6 +7,7 @@
   background-color: var(--primary);
   text-decoration: none;
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .desc {
@@ -17,4 +18,43 @@
   line-height: 20px;
   letter-spacing: -0.16px;
   color: var(--white);
+}
+
+.link:hover {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.link:hover .desc {
+  color: var(--primary);
+}
+
+.link:hover .icon path {
+  fill: var(--primary);
+}
+
+.link:active {
+  background-color: var(--primary);
+  outline: none;
+}
+
+.link:active .desc {
+  color: var(--white);
+}
+
+.link:active .icon path {
+  fill: var(--white);
+}
+
+.link:focus {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.link:focus .desc {
+  color: var(--primary);
+}
+
+.link:focus .icon path {
+  fill: var(--primary);
 }

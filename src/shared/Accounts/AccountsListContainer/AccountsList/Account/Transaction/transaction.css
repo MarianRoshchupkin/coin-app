@@ -24,7 +24,7 @@
 .date {
   font-family: 'Work Sans', sans-serif;
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 400;
   font-style: normal;
   line-height: normal;
   letter-spacing: -0.26px;
@@ -36,6 +36,7 @@
   border-radius: 7px;
   background-color: var(--primary);
   cursor: pointer;
+  transition: all .3s ease;
 }
 
 .desc {
@@ -44,4 +45,31 @@
   line-height: 20px;
   letter-spacing: -0.16px;
   color: var(--white);
+}
+
+.link:hover {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.link:hover .desc {
+  color: var(--primary);
+}
+
+.link:active {
+  background-color: var(--primary);
+  outline: none;
+}
+
+.link:active .desc {
+  color: var(--white);
+}
+
+.link:focus {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.link:focus .desc {
+  color: var(--primary);
 }

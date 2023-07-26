@@ -12,11 +12,7 @@ export function AccountTextContent({ number }: IAccountTextContentProps) {
   return (
     <div className={styles.container}>
       <Title title={'История баланса'} />
-      <Button
-        link={`accounts/${number}`}
-        icon={EIcons.outlinedArrowLeft}
-        text={'Вернуться назад'}
-      />
+      <Button link={`accounts/${number}`} text={'Вернуться назад'} />
     </div>
   );
 }

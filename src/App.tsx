@@ -61,6 +61,7 @@ function AppComponent() {
                 )}
                 <Route path='/' element={<Navigate to='/accounts' replace />} />
                 <Route path='/signup' element={<Navigate to='/accounts' replace />} />
+                <Route path='/logout' element={<Navigate to='/login' replace />} />
                 <Route path='/accounts' element={<Accounts />} />
                 <Route path='/accounts/:number' element={<AccountView />} />
                 <Route path='/accounts/:number/details' element={<AccountDetails />} />

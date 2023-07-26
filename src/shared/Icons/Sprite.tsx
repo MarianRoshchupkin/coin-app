@@ -167,12 +167,6 @@ export function Sprite() {
           fill="#182233"
         />
       </symbol>
-      <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="outlinedMailIcon">
-        <path
-          d="M20 20H4C2.89543 20 2 19.1046 2 18V5.913C2.04661 4.84255 2.92853 3.99899 4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20ZM4 7.868V18H20V7.868L12 13.2L4 7.868ZM4.8 6L12 10.8L19.2 6H4.8Z"
-          fill="#ffffff"
-        />
-      </symbol>
       <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="outlinedHomeIcon">
         <path
           d="M19 21.9999H5C4.44772 21.9999 4 21.5521 4 20.9999V12.9999H2L11.292 3.70686C11.4796 3.51908 11.7341 3.41357 11.9995 3.41357C12.2649 3.41357 12.5194 3.51908 12.707 3.70686L22 12.9999H20V20.9999C20 21.5521 19.5523 21.9999 19 21.9999ZM10 14.9999H14V19.9999H18V11.8279L12 5.82786L6 11.8279V19.9999H10V14.9999Z"
@@ -230,24 +224,11 @@ export function Sprite() {
           fill="#76CA66"
         />
       </symbol>
-      <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="outlinedPlusIcon">
-        <path
-          d="M12 4.00001L12 12M12 12L12 20M12 12L20 12M12 12L4 12"
-          stroke="white"
-          strokeWidth="2"
-        />
-      </symbol>
       <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="outlinedGreenPlusIcon">
         <path
           d="M12 4.00001L12 12M12 12L12 20M12 12L20 12M12 12L4 12"
           stroke="#76CA66"
           strokeWidth="2"
-        />
-      </symbol>
-      <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="outlinedArrowLeftIcon">
-        <path
-          d="M7.83 11L11.41 7.41L10 6L4 12L10 18L11.41 16.59L7.83 13H20V11H7.83Z"
-          fill="white"
         />
       </symbol>
       <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="outlinedRubleIcon">

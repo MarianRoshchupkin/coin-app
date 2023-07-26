@@ -4,6 +4,7 @@ import { Header } from "../Header";
 import { LoginForm } from "./LoginForm";
 
 interface IUserProps {
+  error?: string;
   loginError?: string;
 }
 
@@ -24,8 +25,6 @@ export function Login({ user }: ILoginProps) {
 
       <Header navigation={false} />
       <LoginForm />
-
-      <a className={styles.link} href='/signup'>Зарегестрироваться</a>
     </div>
   );
 }

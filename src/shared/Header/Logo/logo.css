@@ -2,3 +2,15 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.link:hover {
+  outline: none;
+}
+
+.link:active {
+  outline: none;
+}
+
+.link:focus {
+  outline: none;
+}
