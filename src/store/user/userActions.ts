@@ -1,3 +1,4 @@
+import { IUser } from "../../hooks/useUser";
 import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { IInitialState } from "../reducer";
@@ -6,7 +7,7 @@ export const SET_USER = 'SET_USER';
 
 export type SetUserAction = {
   type: typeof SET_USER;
-  user: object;
+  user: IUser;
 }
 
 export const setUser: ActionCreator<SetUserAction> = (user) => ({

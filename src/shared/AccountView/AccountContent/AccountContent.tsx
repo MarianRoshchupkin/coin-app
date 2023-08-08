@@ -1,23 +1,23 @@
 import React from 'react';
 import styles from './accountcontent.css';
+import { limitTransactionsAmount } from "../../../utils/limit/limitTransactionsAmount";
 import { AccountTransfer } from "./AccountTransfer";
 import { AccountBalance } from "./AccountBalance";
 import { AccountHistory } from "./AccountHistory";
-import { filterTransactionsByAccount } from "../../../utils/filtration/filterTransactionsByAccount";
 
 interface IAccountContentProps {
   number: number;
 }
 
 export function AccountContent({ number }: IAccountContentProps) {
-  const transactions = filterTransactionsByAccount(Number(number));
+  const limitedTransactions = limitTransactionsAmount(10, number);
 
   return (
     <div className={styles.container}>
       <AccountTransfer number={number} />
       <AccountBalance number={number} />
-      {transactions.length !== 0 && (
-        <AccountHistory transactions={transactions} number={number} />
+      {limitedTransactions.length !== 0 && (
+        <AccountHistory transactions={limitedTransactions} number={number} />
       )}
     </div>
   );

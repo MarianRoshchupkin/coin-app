@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './accountcontent.css';
-import { filterTransactionsByAccount } from "../../../utils/filtration/filterTransactionsByAccount";
+import { limitTransactionsAmount } from "../../../utils/limit/limitTransactionsAmount";
 import { AccountBalance } from "./AccountBalance"
 import { AccountTransactions } from "./AccountTransactions";
 import { AccountHistory } from "./AccountHistory";
@@ -10,14 +10,14 @@ interface IAccountContent {
 }
 
 export function AccountContent({ number }: IAccountContent) {
-  const transactions = filterTransactionsByAccount(Number(number));
+  const limitedTransactions = limitTransactionsAmount(25, number);
 
   return (
     <div className={styles.container}>
       <AccountBalance number={number} />
       <AccountTransactions number={number} />
-      {transactions.length !== 0 && (
-        <AccountHistory transactions={transactions} number={number} />
+      {limitedTransactions.length !== 0 && (
+        <AccountHistory transactions={limitedTransactions} number={number} />
       )}
     </div>
   );

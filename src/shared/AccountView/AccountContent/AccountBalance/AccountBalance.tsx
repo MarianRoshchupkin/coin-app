@@ -1,6 +1,13 @@
 import React from 'react';
 import styles from './accountbalance.css';
-import { convertDataForSmallGraphics } from "../../../../utils/conversion/convertDataForSmallGraphics";
+import {
+  noBalanceGraphicsOptions,
+  balanceGraphicsOptions,
+  chartAreaBorder,
+  smallGraphicsTicksStyles
+} from "../../../../utils/settingsForGraphics";
+import { convertTwelveToSixMonths } from "../../../../utils/conversion/convertTwelveToSixMonths";
+import { convertDataForBalanceGraphics } from "../../../../utils/conversion/convertDataForBalanceGraphics";
 import { Description } from "../../../Description";
 import { AccountGraphics } from "./AccountGraphics";
 
@@ -9,12 +16,28 @@ interface IAccountBalanceProps {
 }
 
 export function AccountBalance({ number }: IAccountBalanceProps) {
-  const data = convertDataForSmallGraphics(number);
+  const { halfYearMonths, halfYearMonthsNumber } = convertTwelveToSixMonths();
+  const data = convertDataForBalanceGraphics(number, halfYearMonths, halfYearMonthsNumber);
 
   return (
     <a className={styles.container} href={`/accounts/${number}/details`} >
       <Description text={'Динамика баланса'} />
-      <AccountGraphics data={data} />
+      {data.datasets[0].data.every((value) => value === 0 || value === null)
+        ? (
+          <AccountGraphics
+            data={data}
+            options={noBalanceGraphicsOptions}
+            plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
+          />
+        )
+        : (
+          <AccountGraphics
+            data={data}
+            options={balanceGraphicsOptions}
+            plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
+          />
+        )
+      }
     </a>
   );
 }

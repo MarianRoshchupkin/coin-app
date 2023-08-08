@@ -12,6 +12,7 @@ import {
   deleteSession,
   fillCurrenciesWithData,
   findUserByUsername,
+  findAccountByAccount,
   findUserBySessionId,
   getCurrenciesForUser,
   sendCurrenciesExchangeRateToAllClients,
@@ -47,6 +48,7 @@ server.on('upgrade', async (req, socket, head) => {
   const cookies = cookie.parse(req.headers['cookie']);
   const sessionId = cookies && cookies['sessionId'];
   const user = await findUserBySessionId(sessionId);
+  console.log(user);
 
   if (!user) {
     socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
@@ -102,15 +104,16 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
 
 app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { username, password } = req.body;
+  const foundUsername = await findUserByUsername(username);
 
   if (username.length === 0 || password.length === 0) {
     return res.send(indexTemplate(ReactDOM.renderToString(
       App()),
-      JSON.stringify({ signup: true, signupError: 'Введите данные' })
+      JSON.stringify({ signup: true, signupError: 'Придумайте логин/пароль' })
     ));
   }
 
-  if ((await findUserByUsername(username)) && username === (await findUserByUsername(username)).username) {
+  if (foundUsername && username === foundUsername.username) {
     return res.send(indexTemplate(ReactDOM.renderToString(
       App()),
       JSON.stringify({ signup: true, signupError: 'Данный пользователь уже зарегистрирован' })
@@ -152,6 +155,54 @@ app.post("/create-account", auth(), bodyParser.urlencoded({ extended: false }), 
 
 app.post("/transfer-funds", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { from, to, sum } = req.body;
+  const currentAccount = await findAccountByAccount(Number(from));
+  const foundAccount = await findAccountByAccount(Number(to));
+  req.user.currentAccount = Number(from);
+
+  if (from.length === 0 || to.length === 0) {
+    req.user.transferError = 'Введите номер счёта получателя/сумму перевода';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (foundAccount === undefined) {
+    req.user.transferError = 'Указанного вами счёта не существует';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (Number(from) === foundAccount.number) {
+    req.user.transferError = 'Нельзя перевести средства со своего счёта на свой';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+        App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (Number(sum) < 10) {
+    req.user.transferError = 'Нельзя перевести меньше средств, чем 10 рублей';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (Number(sum) > currentAccount.balance) {
+    req.user.transferError = 'Нельзя перевести больше средств, чем есть на счёте';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
 
   const [currentAccountSum] = await database('accounts')
     .select()
@@ -177,6 +228,24 @@ app.post("/transfer-funds", auth(), bodyParser.urlencoded({ extended: false }), 
   await database('accounts')
     .where({ number: to })
     .update({ balance: currentAnotherAccountSum.balance + Number(sum) })
+
+  await database('accountsBalance')
+    .insert({
+      id: generateRandomString(),
+      userId: req.user.id,
+      number: Number(from),
+      balance: currentAccountSum.balance - Number(sum),
+      date: Date.now()
+    })
+
+  await database('accountsBalance')
+    .insert({
+      id: generateRandomString(),
+      userId: req.user.id,
+      number: Number(to),
+      balance: currentAnotherAccountSum.balance + Number(sum),
+      date: Date.now()
+    })
 
   res.send(indexTemplate(ReactDOM.renderToString(
     App()),
@@ -225,6 +294,19 @@ app.get("/transactions-data", auth(), async (req, res) => {
 app.get("/currencies-data", auth(), async (req, res) => {
   const currencies = await getCurrenciesForUser(req.user.id);
   res.json({ currencies });
+});
+
+app.get("/banks-data", auth(), async (req, res) => {
+  const banks = await database('banks').select();
+  res.json({ banks });
+});
+
+app.get("/accounts-balance/:number", auth(), async (req, res) => {
+  const accountsBalance = await database('accountsBalance')
+    .select()
+    .where({ number: req.params.number })
+
+  res.json({ accountsBalance });
 });
 
 app.get("*", auth(), (req, res) => {

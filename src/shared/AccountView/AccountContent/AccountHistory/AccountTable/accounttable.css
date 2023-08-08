@@ -22,6 +22,18 @@
   text-align: left;
 }
 
+.titleOne {
+  width: 210px;
+}
+
+.titleTwo {
+  width: 230px;
+}
+
+.titleThree {
+  width: 185px;
+}
+
 .contentRows {
   display: flex;
   align-items: center;
@@ -33,7 +45,6 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  width: 200px;
   font-family: 'Ubuntu', serif;
   font-size: 16px;
   font-weight: 400;
@@ -41,6 +52,19 @@
   line-height: 24px;
   letter-spacing: -0.16px;
   color: var(--grey2);
+  overflow: hidden;
+}
+
+.contentOne {
+  width: 210px;
+}
+
+.contentTwo {
+  width: 230px;
+}
+
+.contentThree {
+  width: 185px
 }
 
 .positiveAmount {

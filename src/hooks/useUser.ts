@@ -9,6 +9,8 @@ export interface IUser {
   id: string;
   username: string;
   password: string;
+  currentAccount: number;
+  transferError: string;
   loginError: string;
   signupError: string;
   signupSuccess: string;

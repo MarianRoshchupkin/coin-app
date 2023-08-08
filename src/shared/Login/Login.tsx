@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './login.css';
+import { Notification } from "../Notification";
 import { Header } from "../Header";
 import { LoginForm } from "./LoginForm";
 
@@ -16,11 +17,7 @@ export function Login({ user }: ILoginProps) {
   return (
     <div className={styles.container}>
       {user.loginError && (
-        <div className='notification error'>
-          <span className='desc errorText'>
-            {user.loginError}
-          </span>
-        </div>
+        <Notification type={'error'} text={user.loginError} />
       )}
 
       <Header navigation={false} />

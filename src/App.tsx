@@ -52,7 +52,7 @@ function AppComponent() {
         <BrowserRouter>
           <Layout>
             <Header navigation={true} />
-            <Content>
+            <Content user={user}>
               <Routes>
                 {Object.keys(user).length === 0 && (
                   <Route path='/signup' element={<Navigate to='/accounts' replace />} />
@@ -68,7 +68,7 @@ function AppComponent() {
                 <Route path='/currency' element={<Currency />} />
                 <Route path='/banks' element={<Banks />} />
                 <Route path='/create-account' element={<Navigate to='/accounts' replace />} />
-                <Route path='/transfer-funds' element={<Navigate to='/accounts' replace />} />
+                <Route path='/transfer-funds' element={<Navigate to={`/accounts/${user.currentAccount}`} replace />} />
               </Routes>
             </Content>
           </Layout>

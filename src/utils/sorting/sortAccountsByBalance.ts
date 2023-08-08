@@ -1,5 +1,5 @@
 import { IAccount } from "../../hooks/useAccountsData";
-import { mergeAccountsAndLastTransactions } from "../merger/mergeAccountAndLastTransaction";
+import { mergeAccountsAndLastTransactions } from "../merging/mergeAccountAndLastTransaction";
 
 export const sortAccountsByBalance = () => {
   const accountsWithLastTransactions: IAccount[] = mergeAccountsAndLastTransactions();

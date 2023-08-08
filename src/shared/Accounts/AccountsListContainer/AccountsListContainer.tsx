@@ -6,7 +6,7 @@ import { IAccount } from "../../../hooks/useAccountsData";
 import { sortAccountsByAccount } from "../../../utils/sorting/sortAccountsByAccount";
 import { sortAccountsByBalance } from "../../../utils/sorting/sortAccountsByBalance";
 import { sortAccountsByTransaction } from "../../../utils/sorting/sortAccountsByTransaction";
-import { mergeAccountsAndLastTransactions } from "../../../utils/merger/mergeAccountAndLastTransaction";
+import { mergeAccountsAndLastTransactions } from "../../../utils/merging/mergeAccountAndLastTransaction";
 import { AccountsList } from "./AccountsList";
 
 export function AccountsListContainer() {

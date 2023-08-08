@@ -30,15 +30,18 @@
 
 .button:hover {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }
 
 .button:active {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }
 
 .button:focus {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }

@@ -56,16 +56,19 @@
 
 .input:hover {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }
 
 .input:active {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }
 
 .input:focus {
   border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
   outline: none;
 }
 

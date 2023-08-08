@@ -62,6 +62,12 @@ export const findUserByUsername = async (username) =>
     .where({ username })
     .first()
 
+export const findAccountByAccount = async (account) =>
+  database('accounts')
+    .select()
+    .where({number: account})
+    .first()
+
 export const findUserBySessionId = async (sessionId) => {
   const session = await database('sessions')
     .select('userId')

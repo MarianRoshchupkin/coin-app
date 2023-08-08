@@ -8,5 +8,5 @@ export const filterTransactionsByAccount = (accountNumber: number) => {
       transaction.from === accountNumber || transaction.to === accountNumber
     );
 
-  return filteredTransactions.reverse();
+  return filteredTransactions;
 }

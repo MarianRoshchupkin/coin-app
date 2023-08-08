@@ -2,6 +2,7 @@ import React from 'react';
 
 export enum EIcons {
   error = 'errorIcon',
+  checkCircle = 'checkCircleIcon',
   checkboxChecked = 'checkboxCheckedIcon',
   nearMe = 'nearMeIcon',
   home = 'homeIcon',

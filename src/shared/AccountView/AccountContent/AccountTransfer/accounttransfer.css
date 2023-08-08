@@ -3,5 +3,6 @@
   flex-direction: column;
   padding: 25px 50px;
   border-radius: 50px;
+  max-width: 606px;
   background-color: var(--grey7);
 }

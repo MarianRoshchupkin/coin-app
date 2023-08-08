@@ -48,10 +48,20 @@ export function Sprite() {
           fill="#182233"
         />
       </symbol>
-      <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="errorIcon">
+      <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="errorIcon">
         <path
-          d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"
-          fill="#182233"
+          d="M8 6.303l-.951-.952A1.2 1.2 0 005.35 7.05l.953.95-.952.951A1.2 1.2 0 107.05 10.65L8 9.697l.951.952A1.2 1.2 0 1010.65 8.95L9.697 8l.952-.951A1.2 1.2 0 108.95 5.35L8 6.303zM16 8A8 8 0 110 8a8 8 0 0116 0z"
+          fill="#E01F19"
+        />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="checkCircleIcon">
+        <path
+          d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"
+          fill="#76CA66"
+        />
+        <path
+          d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"
+          fill="white"
         />
       </symbol>
       <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="filterIcon">
