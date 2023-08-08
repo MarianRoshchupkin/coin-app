@@ -1,12 +1,12 @@
-import { userReducer,IUserState } from "./user/userReducer";
+import { userReducer, IUserState } from "./user/userReducer";
 import { SET_USER, SetUserAction } from "./user/userActions";
 import { accountsReducer, IAccountsState } from "./accounts/accountsReducer";
 import { SET_ACCOUNTS, SetAccountsAction } from "./accounts/accountsActions";
-import { transactionsReducer,ITransactionsState } from "./transactions/transactionsReducer";
+import { transactionsReducer, ITransactionsState } from "./transactions/transactionsReducer";
 import { SET_TRANSACTIONS, SetTransactionsAction } from "./transactions/transactionsActions";
-import { sortingItemSwitcherReducer,ISortingItemSwitcherState } from "./sortingItemSwitcher/sortingItemSwitcherReducer";
+import { sortingItemSwitcherReducer, ISortingItemSwitcherState } from "./sortingItemSwitcher/sortingItemSwitcherReducer";
 import { SET_SORTING_ITEM_SWITCHER, SetSortingItemSwitcherAction } from "./sortingItemSwitcher/sortingItemSwitcherActions";
-import { sortingTypeReducer, ISortingTypeState } from "./sortingType/sortingTypeReducer";
+import { sortingTypeReducer,ISortingTypeState } from "./sortingType/sortingTypeReducer";
 import { SET_SORTING_TYPE, SetSortingTypeAction } from "./sortingType/sortingTypeActions";
 import { currenciesReducer, ICurrenciesState } from "./currencies/currenciesReducer";
 import { SET_CURRENCIES, SetCurrenciesAction } from "./currencies/currenciesActions";
@@ -16,6 +16,10 @@ import { accountsBalanceReducer, IAccountsBalanceState } from "./accountsBalance
 import { SET_ACCOUNTS_BALANCE, SetAccountsBalanceAction } from "./accountsBalance/accountsBalanceActions";
 import { banksReducer, IBanksState } from "./banks/banksReducer";
 import { SET_BANKS, SetBanksAction } from "./banks/banksActions";
+import { transactionsLoadCounterReducer,ITransactionsLoadCounterState } from "./transactionsLoadCounter/transactionsLoadCounterReducer";
+import { SET_TRANSACTIONS_LOAD_COUNTER, SetTransactionsLoadCounterAction } from "./transactionsLoadCounter/transactionsLoadCounterActions";
+import { transactionsOffsetReducer,ITransactionsOffsetState } from "./transactionsOffset/transactionsOffsetReducer";
+import { SET_TRANSACTIONS_OFFSET, SetTransactionsOffsetAction } from "./transactionsOffset/transactionsOffsetActions";
 
 export interface IInitialState {
   user: IUserState;
@@ -27,6 +31,8 @@ export interface IInitialState {
   dropdownSwitcher: IDropdownSwitcherState;
   sortingItemSwitcher: ISortingItemSwitcherState;
   sortingType: ISortingTypeState;
+  transactionsLoadCounter: ITransactionsLoadCounterState;
+  transactionsOffset: ITransactionsOffsetState;
 }
 
 export const initialState: IInitialState = {
@@ -56,6 +62,12 @@ export const initialState: IInitialState = {
   },
   sortingType: {
     sortingType: ''
+  },
+  transactionsLoadCounter: {
+    transactionsLoadCounter: 0
+  },
+  transactionsOffset: {
+    transactionsOffset: 0
   }
 }
 
@@ -68,6 +80,8 @@ type Actions = SetUserAction
   | SetDropdownSwitcherAction
   | SetSortingItemSwitcherAction
   | SetSortingTypeAction
+  | SetTransactionsLoadCounterAction
+  | SetTransactionsOffsetAction
 
 export const rootReducer = (state = initialState, action: Actions): IInitialState => {
   switch (action.type) {
@@ -115,6 +129,16 @@ export const rootReducer = (state = initialState, action: Actions): IInitialStat
       return {
         ...state,
         sortingType: sortingTypeReducer(state.sortingType, action)
+      }
+    case SET_TRANSACTIONS_LOAD_COUNTER:
+      return {
+        ...state,
+        transactionsLoadCounter: transactionsLoadCounterReducer(state.transactionsLoadCounter, action)
+      }
+    case SET_TRANSACTIONS_OFFSET:
+      return {
+        ...state,
+        transactionsOffset: transactionsOffsetReducer(state.transactionsOffset, action)
       }
     default:
       return state;

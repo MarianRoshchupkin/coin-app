@@ -1,14 +1,15 @@
 import { filterTransactionsByAccount } from "../filtration/filterTransactionsByAccount";
 
-export const limitTransactionsAmount = (limit: number, accountNumber: number) => {
+export const limitTransactionsAmount = (limit: number, offset: number, accountNumber: number) => {
   const transactions = filterTransactionsByAccount(accountNumber);
-  console.log(transactions);
   let limitedTransactions;
 
-  if (transactions.length < limit) {
+  if (transactions.length < limit + offset) {
     limitedTransactions = transactions.reverse();
   } else {
-    limitedTransactions = transactions.slice(transactions.length - limit, transactions.length).reverse();
+    limitedTransactions = transactions
+      .slice(transactions.length - limit - offset, transactions.length)
+      .reverse();
   }
 
   return limitedTransactions;

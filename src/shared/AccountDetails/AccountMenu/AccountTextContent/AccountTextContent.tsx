@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './accounttextcontent.css';
 import { Title } from "../../../Title";
 import { Button } from "../../../Button";
-import { EIcons } from "../../../Icons/Icon";
 
 interface IAccountTextContentProps {
   number: number;

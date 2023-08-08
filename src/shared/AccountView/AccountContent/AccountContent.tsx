@@ -10,7 +10,7 @@ interface IAccountContentProps {
 }
 
 export function AccountContent({ number }: IAccountContentProps) {
-  const limitedTransactions = limitTransactionsAmount(10, number);
+  const limitedTransactions = limitTransactionsAmount(10, 0, number);
 
   return (
     <div className={styles.container}>

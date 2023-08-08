@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './notification.css';
-import { EIcons, Icon } from "../Icons/Icon";
+import { ErrorIcon } from "../Icons/ErrorIcon";
+import { CheckCircleIcon } from "../Icons/CheckCircleIcon";
 
 interface INotificationProps {
   type: string;
@@ -16,8 +17,8 @@ export function Notification({ type, text }: INotificationProps) {
         <div className={`${styles.notification} ${type === 'error' ? styles.error : styles.success}`}>
           <span className={styles.icon}>
             {type === 'error'
-              ? (<Icon name={EIcons.error} size={28} />)
-              : (<Icon name={EIcons.checkCircle} size={28} />)
+              ? (<ErrorIcon size={28} />)
+              : (<CheckCircleIcon size={28} />)
             }
           </span>
           <span className={styles.desc}>

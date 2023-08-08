@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './acccountslist.css';
-import { EIcons, Icon } from "../../../../../Icons/Icon";
+import { CheckIcon } from "../../../../../Icons/CheckIcon";
 
 interface IMenuItemsListProps {
   sortingItemSwitcher: boolean;
@@ -15,7 +15,7 @@ export function AccountsList({ sortingItemSwitcher, sortingType }: IMenuItemsLis
           <span className={styles.desc}>По номеру</span>
           {sortingItemSwitcher && sortingType === 'По номеру' && (
             <span className={styles.icon}>
-              <Icon name={EIcons.outlinedCheck} size={24} />
+              <CheckIcon size={24} />
             </span>
           )}
         </a>
@@ -25,7 +25,7 @@ export function AccountsList({ sortingItemSwitcher, sortingType }: IMenuItemsLis
           <span className={styles.desc}>По балансу</span>
           {sortingItemSwitcher && sortingType === 'По балансу' && (
             <span className={styles.icon}>
-              <Icon name={EIcons.outlinedCheck} size={24} />
+              <CheckIcon size={24} />
             </span>
           )}
         </a>
@@ -35,7 +35,7 @@ export function AccountsList({ sortingItemSwitcher, sortingType }: IMenuItemsLis
           <span className={styles.desc}>По последней транзакции</span>
           {sortingItemSwitcher && sortingType === 'По последней транзакции' && (
             <span className={styles.icon}>
-              <Icon name={EIcons.outlinedCheck} size={24} />
+              <CheckIcon size={24} />
             </span>
           )}
         </a>

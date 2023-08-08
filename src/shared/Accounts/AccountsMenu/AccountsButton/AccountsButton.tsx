@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './accountsbutton.css';
-import { EIcons, Icon } from "../../../Icons/Icon";
 
 export function AccountsButton() {
   return (

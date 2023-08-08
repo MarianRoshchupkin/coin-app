@@ -6,7 +6,6 @@ import { Login } from "./shared/Login";
 import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
-import { Sprite } from "./shared/Icons/Sprite";
 import { Accounts } from "./shared/Accounts";
 import { AccountView } from "./shared/AccountView";
 import { AccountDetails } from "./shared/AccountDetails";
@@ -80,7 +79,6 @@ function AppComponent() {
 
 export const App = hot(() =>
   <Provider store={store}>
-    <Sprite />
     <AppComponent />
   </Provider>
 );

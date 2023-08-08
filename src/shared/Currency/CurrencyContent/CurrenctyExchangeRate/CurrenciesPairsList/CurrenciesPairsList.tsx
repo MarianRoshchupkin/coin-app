@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './currenciespairslist.css';
 import { useCurrenciesExchangeRateData } from "../../../../../hooks/useCurrenciesExchangeRateData";
-import { EIcons, Icon } from "../../../../Icons/Icon";
+import { ArrowUpGreenIcon } from "../../../../Icons/ArrowUpGreenIcon";
+import { ArrowDownRedIcon } from "../../../../Icons/ArrowDownRedIcon";
 
 export function CurrenciesPairsList() {
   const currenciesExchangeRates = useCurrenciesExchangeRateData();
@@ -20,8 +21,8 @@ export function CurrenciesPairsList() {
           <p className={styles.value}>
             <span className={styles.amount}>{ currencyExchangeRate.rate }</span>
             {currencyExchangeRate.change === 1
-              ? (<Icon name={EIcons.arrowUpGreen} size={20} />)
-              : (<Icon name={EIcons.arrowDownRed} size={20} />)
+              ? (<ArrowUpGreenIcon size={20} />)
+              : (<ArrowDownRedIcon size={20} />)
             }
           </p>
         </div>

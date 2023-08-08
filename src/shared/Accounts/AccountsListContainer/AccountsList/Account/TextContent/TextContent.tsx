@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './textcontent.css';
-import { EIcons, Icon } from "../../../../../Icons/Icon";
+import { RubleIcon } from "../../../../../Icons/RubleIcon";
 
 interface ITextContentProps {
   number: number;
@@ -17,7 +17,7 @@ export function TextContent({ number, balance }: ITextContentProps) {
         ) : (
           <span>0</span>
         )}
-        <Icon name={EIcons.outlinedRuble} size={12} />
+        <RubleIcon size={12} />
       </p>
     </div>
   );

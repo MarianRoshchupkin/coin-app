@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './accounttable.css';
 import { ITransaction } from "../../../../../hooks/useTransactionsData";
-import { EIcons, Icon } from "../../../../Icons/Icon";
+import { MinusIcon } from "../../../../Icons/MinusIcon";
+import { RubleRedIcon } from "../../../../Icons/RubleRedIcon";
+import { PlusGreenIcon } from "../../../../Icons/PlusGreenIcon";
+import { RubleGreenIcon } from "../../../../Icons/RubleGreenIcon";
 
 interface IAccountTable {
   transactions: ITransaction[];
@@ -31,16 +34,16 @@ export function AccountTable({ transactions, number }: IAccountTable) {
             {number === transaction.from
               ? (
                 <td className={`${styles.content} ${styles.contentThree}`}>
-                  <Icon name={EIcons.minus} size={10} />
+                  <MinusIcon size={10} />
                   <span className={styles.negativeAmount}>{ transaction.sum }</span>
-                  <Icon name={EIcons.outlinedRedRuble} size={16} />
+                  <RubleRedIcon size={16} />
                 </td>
               )
               : (
                 <td className={`${styles.content} ${styles.contentThree}`}>
-                  <Icon name={EIcons.outlinedGreenPlus} size={10} />
+                  <PlusGreenIcon size={10} />
                   <span className={styles.positiveAmount}>{ transaction.sum }</span>
-                  <Icon name={EIcons.outlinedGreenRuble} size={16} />
+                  <RubleGreenIcon size={16} />
                 </td>
               )
             }
