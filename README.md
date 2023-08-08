@@ -1,18 +1,22 @@
-# Social network app
+# Coin app
 A simple social network app that is built on React.js. It uses TypeScript for safety,
 Redux for state management, react-router-dom library for routing.
 
-P.S. The app isn't actually done up to the end and of course it needs to be improved. Nevertheless the main features of an app are realized
+![Login](screenshots/login.png)
 
-![Start-page](screenshots/preview1.png)
+![Signup](screenshots/signup.png)
 
-![Posts](screenshots/preview2.png)
+![Accounts](screenshots/accounts.png)
 
-![User-page](screenshots/preview3.png)
+![Sorting](screenshots/sorting.png)
 
-![Edit-page](screenshots/preview4.png)
+![AccountView](screenshots/accountview.png)
 
-![Modal](screenshots/preview5.png)
+![BalanceHistory](screenshots/balancehistory.png)
+
+![Currency](screenshots/currency.png)
+
+![Banks](screenshots/banks.png)
 
 ## Usage
 - Enter your data to signup/login. Then you will be redirected to the home page
@@ -30,7 +34,7 @@ $ npm run dev
 ## Author
 Marian Roshchupkin &lt;roshchupkin.marian@gmail.com&gt;
 
-Updated on: 11 May 2023
+Updated on: 9 August 2023
 
 ## License
 MIT - see [LICENSE](LICENSE)

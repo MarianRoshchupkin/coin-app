@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './content.css';
-import {Notification} from "../Notification";
+import { Notification } from "../Notification";
 
 interface IUserProps {
   transferError?: string;

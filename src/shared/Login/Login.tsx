@@ -15,13 +15,15 @@ interface ILoginProps {
 
 export function Login({ user }: ILoginProps) {
   return (
-    <div className={styles.container}>
-      {user.loginError && (
-        <Notification type={'error'} text={user.loginError} />
-      )}
+    <div className={styles.content}>
+      <div className={styles.container}>
+        {user.loginError && (
+          <Notification type={'error'} text={user.loginError} />
+        )}
 
-      <Header navigation={false} />
-      <LoginForm />
+        <Header navigation={false} />
+        <LoginForm />
+      </div>
     </div>
   );
 }

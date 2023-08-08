@@ -1,5 +1,4 @@
 .container {
-  position: fixed;
+  position: absolute;
   top: 144px;
-  left: 50px;
 }
