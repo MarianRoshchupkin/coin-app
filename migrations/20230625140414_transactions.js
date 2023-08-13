@@ -7,9 +7,9 @@ exports.up = function (knex) {
     table.string('id', 255).unique();
     table.string('userId', 255).notNullable();
     table.integer('sum', 255).notNullable();
-    table.integer('date', 255).notNullable();
-    table.integer('from', 255).notNullable();
-    table.integer('to', 255).notNullable();
+    table.double('date', 255).notNullable();
+    table.double('from', 255).notNullable();
+    table.double('to', 255).notNullable();
   })
 };
 

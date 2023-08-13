@@ -6,6 +6,7 @@ import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 
 export interface IBank {
+  id: string;
   lat: number;
   lon: number;
 }

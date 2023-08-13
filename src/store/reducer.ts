@@ -1,24 +1,37 @@
-import { userReducer, IUserState } from "./user/userReducer";
+import { IUserState, userReducer } from "./user/userReducer";
+import { IAccountsState, accountsReducer } from "./accounts/accountsReducer";
+import { IAccountsBalanceState, accountsBalanceReducer } from "./accountsBalance/accountsBalanceReducer";
+import { ITransactionsState, transactionsReducer } from "./transactions/transactionsReducer";
+import { IBanksState, banksReducer } from "./banks/banksReducer";
+import { IDropdownSwitcherState, dropdownSwitcherReducer } from "./dropdownSwitcher/dropdownSwitcherReducer";
+import { ISortingItemSwitcherState, sortingItemSwitcherReducer } from "./sortingItemSwitcher/sortingItemSwitcherReducer";
+import { ISortingTypeState, sortingTypeReducer } from "./sortingType/sortingTypeReducer";
+import { ITransactionsLoadCounterState, transactionsLoadCounterReducer } from "./transactionsLoadCounter/transactionsLoadCounterReducer";
+import { ITransactionsOffsetState, transactionsOffsetReducer } from "./transactionsOffset/transactionsOffsetReducer";
 import { SET_USER, SetUserAction } from "./user/userActions";
-import { accountsReducer, IAccountsState } from "./accounts/accountsReducer";
-import { SET_ACCOUNTS, SetAccountsAction } from "./accounts/accountsActions";
-import { transactionsReducer, ITransactionsState } from "./transactions/transactionsReducer";
-import { SET_TRANSACTIONS, SetTransactionsAction } from "./transactions/transactionsActions";
-import { sortingItemSwitcherReducer, ISortingItemSwitcherState } from "./sortingItemSwitcher/sortingItemSwitcherReducer";
-import { SET_SORTING_ITEM_SWITCHER, SetSortingItemSwitcherAction } from "./sortingItemSwitcher/sortingItemSwitcherActions";
-import { sortingTypeReducer,ISortingTypeState } from "./sortingType/sortingTypeReducer";
-import { SET_SORTING_TYPE, SetSortingTypeAction } from "./sortingType/sortingTypeActions";
-import { currenciesReducer, ICurrenciesState } from "./currencies/currenciesReducer";
-import { SET_CURRENCIES, SetCurrenciesAction } from "./currencies/currenciesActions";
-import { dropdownSwitcherReducer, IDropdownSwitcherState } from "./dropdownSwitcher/dropdownSwitcherReducer";
+import {
+  SET_ACCOUNTS,
+  SET_ACCOUNTS_SUCCESS,
+  SetAccountsAction,
+  SetAccountsSuccessAction
+} from "./accounts/accountsActions";
+import {
+  SET_ACCOUNTS_BALANCE,
+  SET_ACCOUNTS_BALANCE_SUCCESS,
+  SetAccountsBalanceAction,
+  SetAccountsBalanceSuccessAction
+} from "./accountsBalance/accountsBalanceActions";
+import {
+  SET_TRANSACTIONS,
+  SET_TRANSACTIONS_SUCCESS,
+  SetTransactionsAction,
+  SetTransactionsSuccessAction
+} from "./transactions/transactionsActions";
+import { SET_BANKS, SET_BANKS_SUCCESS, SetBanksAction, SetBanksSuccessAction } from "./banks/banksActions";
 import { SET_DROPDOWN_SWITCHER, SetDropdownSwitcherAction } from "./dropdownSwitcher/dropdownSwitcherActions";
-import { accountsBalanceReducer, IAccountsBalanceState } from "./accountsBalance/accountsBalanceReducer";
-import { SET_ACCOUNTS_BALANCE, SetAccountsBalanceAction } from "./accountsBalance/accountsBalanceActions";
-import { banksReducer, IBanksState } from "./banks/banksReducer";
-import { SET_BANKS, SetBanksAction } from "./banks/banksActions";
-import { transactionsLoadCounterReducer,ITransactionsLoadCounterState } from "./transactionsLoadCounter/transactionsLoadCounterReducer";
+import { SET_SORTING_ITEM_SWITCHER, SetSortingItemSwitcherAction } from "./sortingItemSwitcher/sortingItemSwitcherActions";
+import { SET_SORTING_TYPE, SetSortingTypeAction } from "./sortingType/sortingTypeActions";
 import { SET_TRANSACTIONS_LOAD_COUNTER, SetTransactionsLoadCounterAction } from "./transactionsLoadCounter/transactionsLoadCounterActions";
-import { transactionsOffsetReducer,ITransactionsOffsetState } from "./transactionsOffset/transactionsOffsetReducer";
 import { SET_TRANSACTIONS_OFFSET, SetTransactionsOffsetAction } from "./transactionsOffset/transactionsOffsetActions";
 
 export interface IInitialState {
@@ -26,7 +39,6 @@ export interface IInitialState {
   accounts: IAccountsState;
   accountsBalance: IAccountsBalanceState;
   transactions: ITransactionsState;
-  currencies: ICurrenciesState;
   banks: IBanksState;
   dropdownSwitcher: IDropdownSwitcherState;
   sortingItemSwitcher: ISortingItemSwitcherState;
@@ -40,19 +52,20 @@ export const initialState: IInitialState = {
     user: {}
   },
   accounts: {
-    accounts: []
+    accounts: [],
+    loading: false
   },
   accountsBalance: {
-    accountsBalance: []
+    accountsBalance: [],
+    loading: false,
   },
   transactions: {
-    transactions: []
-  },
-  currencies: {
-    currencies: []
+    transactions: [],
+    loading: false,
   },
   banks: {
-    banks: []
+    banks: [],
+    loading: false,
   },
   dropdownSwitcher: {
     dropdownSwitcher: false
@@ -73,10 +86,13 @@ export const initialState: IInitialState = {
 
 type Actions = SetUserAction
   | SetAccountsAction
+  | SetAccountsSuccessAction
   | SetAccountsBalanceAction
+  | SetAccountsBalanceSuccessAction
   | SetTransactionsAction
-  | SetCurrenciesAction
+  | SetTransactionsSuccessAction
   | SetBanksAction
+  | SetBanksSuccessAction
   | SetDropdownSwitcherAction
   | SetSortingItemSwitcherAction
   | SetSortingTypeAction
@@ -91,26 +107,25 @@ export const rootReducer = (state = initialState, action: Actions): IInitialStat
         user: userReducer(state.user, action)
       }
     case SET_ACCOUNTS:
+    case SET_ACCOUNTS_SUCCESS:
       return {
         ...state,
         accounts: accountsReducer(state.accounts, action)
       }
     case SET_ACCOUNTS_BALANCE:
+    case SET_ACCOUNTS_BALANCE_SUCCESS:
       return {
         ...state,
         accountsBalance: accountsBalanceReducer(state.accountsBalance, action)
       }
     case SET_TRANSACTIONS:
+    case SET_TRANSACTIONS_SUCCESS:
       return {
         ...state,
         transactions: transactionsReducer(state.transactions, action)
       }
-    case SET_CURRENCIES:
-      return {
-        ...state,
-        currencies: currenciesReducer(state.currencies, action)
-      }
     case SET_BANKS:
+    case SET_BANKS_SUCCESS:
       return {
         ...state,
         banks: banksReducer(state.banks, action)

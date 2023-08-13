@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './accountformcontainer.css';
 import { AccountForm } from "./AccountForm";
-import {el} from "@faker-js/faker";
 
 interface IAccountFormContainerProps {
   number: number;

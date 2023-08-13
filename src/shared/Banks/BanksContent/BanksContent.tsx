@@ -22,7 +22,7 @@ export function BanksContent({ banks }: IBanksContentProps) {
           modules={['control.ZoomControl', 'control.FullscreenControl']}
         >
           {banks.map((bank) => (
-            <Placemark defaultGeometry={[bank.lat, bank.lon]} />
+            <Placemark defaultGeometry={[bank.lat, bank.lon]} key={bank.id} />
           ))}
         </Map>
       </YMaps>

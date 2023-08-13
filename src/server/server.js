@@ -10,27 +10,21 @@ import {
   createHash,
   createSession,
   deleteSession,
-  fillCurrenciesWithData,
   findUserByUsername,
   findAccountByAccount,
-  findUserBySessionId,
-  getCurrenciesForUser,
-  sendCurrenciesExchangeRateToAllClients,
-  getAllCurrenciesExchangeRate,
-  insertNewValuesForCurrenciesExchangeRate,
 } from "./apiMethods";
-import WebSocket from "ws";
-import * as http from "http";
 import bodyParser from "body-parser";
-import cookie from 'cookie';
 import cookieParser from "cookie-parser";
 import knex from "knex";
 
 export const database = knex({
-  client: "sqlite3",
-  useNullAsDefault: true,
+  client: 'mysql',
   connection: {
-    filename: './data/db.sqlite3'
+    host: 'sql9.freemysqlhosting.net',
+    port: '3306',
+    database: 'sql9638829',
+    user: 'sql9638829',
+    password: 'ETdmz4GCm8'
   },
 })
 
@@ -40,54 +34,20 @@ app.use(express.json());
 app.use("/static", express.static("./dist/client"));
 app.use(cookieParser());
 
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ clientTracking: false, noServer: true });
-const clients = new Map();
-
-server.on('upgrade', async (req, socket, head) => {
-  const cookies = cookie.parse(req.headers['cookie']);
-  const sessionId = cookies && cookies['sessionId'];
-  const user = await findUserBySessionId(sessionId);
-  console.log(user);
-
-  if (!user) {
-    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-    socket.destroy();
-    return;
-  }
-
-  req.user = user;
-  req.sessionId = sessionId;
-  wss.handleUpgrade(req, socket, head, (ws) => {
-    wss.emit('connection', ws, req)
-  })
-})
-
-wss.on('connection', async(ws, req) => {
-  clients.set(ws);
-
-  setInterval(async () => {
-    const currenciesExchangeRate = await getAllCurrenciesExchangeRate();
-    const newCurrenciesExchangeRate = await insertNewValuesForCurrenciesExchangeRate(currenciesExchangeRate);
-
-    await sendCurrenciesExchangeRateToAllClients(ws, newCurrenciesExchangeRate, clients);
-  }, 500)
-})
-
 app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { username, password } = req.body;
   const user = await findUserByUsername(username);
 
   if (username.length === 0 || password.length === 0) {
     return res.send(indexTemplate(ReactDOM.renderToString(
-      App()),
+        App()),
       JSON.stringify({ login: true, loginError: 'Введите логин/пароль' })
     ));
   }
 
   if (!user || user.password !== createHash(password)) {
     return res.send(indexTemplate(ReactDOM.renderToString(
-      App()),
+        App()),
       JSON.stringify({ login: true, loginError: 'Неверный логин/пароль' })
     ));
   }
@@ -97,7 +57,7 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
   res
     .cookie("sessionId", sessionId, { httpOnly: true })
     .send(indexTemplate(ReactDOM.renderToString(
-      App()),
+        App()),
       JSON.stringify(user)
     ));
 });
@@ -105,6 +65,7 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
 app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { username, password } = req.body;
   const foundUsername = await findUserByUsername(username);
+  const userId = generateRandomString();
 
   if (username.length === 0 || password.length === 0) {
     return res.send(indexTemplate(ReactDOM.renderToString(
@@ -120,14 +81,12 @@ app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) 
     ));
   }
 
-  const [{ id }] = await database('users')
+  await database('users')
     .insert({
-      id: generateRandomString(),
+      id: userId,
       username: username,
       password: createHash(password)
-    }, 'id');
-
-  await fillCurrenciesWithData(id);
+    });
 
   res.send(indexTemplate(ReactDOM.renderToString(
     App()),
@@ -136,12 +95,13 @@ app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) 
 });
 
 app.post("/create-account", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
+  const accountId = generateRandomString();
   const number = generateFifteenDigitNumber();
   const balance = generateFiveDigitNumber();
 
   await database('accounts')
     .insert({
-      id: generateRandomString(),
+      id: accountId,
       userId: req.user.id,
       number: number,
       balance: balance
