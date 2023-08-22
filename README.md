@@ -1,6 +1,6 @@
 # Coin app
 Coin is an application that provides banking service. It's built on React.js and uses TypeScript for safety,
-Redux for state management, Web Sockets for updating currencies exchange rate react-router-dom library for routing.
+Redux for state management, Web Sockets for updating currencies exchange and rate react-router-dom library for routing.
 
 ![Login](screenshots/login.png)
 
