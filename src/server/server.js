@@ -10,22 +10,33 @@ import {
   createHash,
   createSession,
   deleteSession,
+  fillCurrenciesWithData,
   findUserByUsername,
   findAccountByAccount,
+  findCurrencyByCurrency,
+  findUserBySessionId,
+  getCurrenciesForUser,
+  sendCurrenciesExchangeToAllClients,
+  getAllCurrenciesExchange,
+  insertNewValuesForCurrenciesExchange,
+  updateCurrenciesTable
 } from "./apiMethods";
+import WebSocket from "ws";
+import * as http from "http";
 import bodyParser from "body-parser";
+import cookie from 'cookie';
 import cookieParser from "cookie-parser";
 import knex from "knex";
 
 export const database = knex({
-  client: 'mysql',
+  client: "sqlite3",
+  useNullAsDefault: true,
   connection: {
-    host: 'sql9.freemysqlhosting.net',
-    port: '3306',
-    database: 'sql9638829',
-    user: 'sql9638829',
-    password: 'ETdmz4GCm8'
+    filename: './data/db.sqlite3'
   },
+  migrations: {
+    tableName: "knex_migrations",
+  }
 })
 
 const app = express();
@@ -33,6 +44,37 @@ const app = express();
 app.use(express.json());
 app.use("/static", express.static("./dist/client"));
 app.use(cookieParser());
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ clientTracking: false, noServer: true });
+const clients = new Map();
+
+server.on('upgrade', async (req, socket, head) => {
+  const cookies = cookie.parse(req.headers['cookie']);
+  const sessionId = cookies && cookies['sessionId'];
+  const user = await findUserBySessionId(sessionId);
+
+  if (!user) {
+    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+    socket.destroy();
+    return;
+  }
+
+  wss.handleUpgrade(req, socket, head, (ws) => {
+    wss.emit('connection', ws)
+  })
+})
+
+wss.on('connection', async(ws) => {
+  clients.set(ws);
+
+  setInterval(async () => {
+    const currenciesExchange = await getAllCurrenciesExchange();
+    const newCurrenciesExchange = await insertNewValuesForCurrenciesExchange(currenciesExchange);
+
+    await sendCurrenciesExchangeToAllClients(ws, newCurrenciesExchange, clients);
+  }, 10000);
+})
 
 app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) => {
   const { username, password } = req.body;
@@ -95,13 +137,12 @@ app.post("/signup",bodyParser.urlencoded({ extended: false }), async (req, res) 
 });
 
 app.post("/create-account", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
-  const accountId = generateRandomString();
   const number = generateFifteenDigitNumber();
   const balance = generateFiveDigitNumber();
 
   await database('accounts')
     .insert({
-      id: accountId,
+      id: generateRandomString(),
       userId: req.user.id,
       number: number,
       balance: balance
@@ -213,6 +254,71 @@ app.post("/transfer-funds", auth(), bodyParser.urlencoded({ extended: false }), 
   ));
 });
 
+app.post("/currency-buy", auth(), bodyParser.urlencoded({ extended: false }), async (req, res) => {
+  const { from, to, amount } = req.body;
+
+  if (from.length === 0 || to.length === 0 || amount.length === 0) {
+    req.user.currencyError = 'Выберите валютные коды/введите сумму перевода';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (from === to) {
+    req.user.currencyError = 'Нельзя конвертировать валюту в точно такую же';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  const fromCurrency = await findCurrencyByCurrency(req.user.id, from);
+
+  if (fromCurrency === undefined) {
+    req.user.currencyError = 'Вы еще не приобрели выбранную вами конвертируемую валюту';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  if (Number(amount) > fromCurrency.amount) {
+    req.user.currencyError = 'Нельзя перевести больше средств, чем есть у вас в валюте';
+
+    return res.send(indexTemplate(ReactDOM.renderToString(
+      App()),
+      JSON.stringify(req.user ? req.user : {})
+    ));
+  }
+
+  const [exchangeRate] = await database('exchange')
+    .select()
+    .where({ from: from, to: to })
+
+  await updateCurrenciesTable(req, to, 1, amount, exchangeRate.rate);
+
+  await database(from)
+    .where({ userId: req.user.id, code: from })
+    .update({
+      amount: database.raw(`amount - ${Number(amount)}`)
+    })
+
+  await database(to)
+    .where({ userId: req.user.id, code: to })
+    .update({
+      amount: database.raw(`amount + ${Number(amount)} * ${exchangeRate.rate}`)
+    })
+
+  res.send(indexTemplate(ReactDOM.renderToString(
+    App()),
+    JSON.stringify(req.user ? req.user : {})
+  ));
+});
+
 app.get("/", auth(), (req, res) => {
   res.send(indexTemplate(ReactDOM.renderToString(
     App()),
@@ -243,6 +349,14 @@ app.get("/accounts-data", auth(), async (req, res) => {
   res.json({ accounts });
 });
 
+app.get("/accounts-balance/:number", auth(), async (req, res) => {
+  const accountsBalance = await database('accountsBalance')
+    .select()
+    .where({ number: req.params.number })
+
+  res.json({ accountsBalance });
+});
+
 app.get("/transactions-data", auth(), async (req, res) => {
   const transactions = await database('transactions')
     .select()
@@ -252,21 +366,22 @@ app.get("/transactions-data", auth(), async (req, res) => {
 });
 
 app.get("/currencies-data", auth(), async (req, res) => {
+  const userCurrencies = await database('currencies')
+    .select()
+    .where({ userId: req.user.id })
+
+  if (userCurrencies.length === 0) {
+    await fillCurrenciesWithData(req.user.id);
+  }
+
   const currencies = await getCurrenciesForUser(req.user.id);
+
   res.json({ currencies });
 });
 
 app.get("/banks-data", auth(), async (req, res) => {
   const banks = await database('banks').select();
   res.json({ banks });
-});
-
-app.get("/accounts-balance/:number", auth(), async (req, res) => {
-  const accountsBalance = await database('accountsBalance')
-    .select()
-    .where({ number: req.params.number })
-
-  res.json({ accountsBalance });
 });
 
 app.get("*", auth(), (req, res) => {
@@ -276,6 +391,6 @@ app.get("*", auth(), (req, res) => {
   ));
 });
 
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log("server started on port http://localhost:3000");
 });

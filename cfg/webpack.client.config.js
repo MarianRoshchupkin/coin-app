@@ -20,6 +20,24 @@ module.exports = {
     filename: "client.js",
     publicPath: "//localhost:3001/static",
   },
+  // devServer: {
+  //   proxy: {
+  //     context: '/websocket',
+  //     target: 'ws://localhost:3000',
+  //     changeOrigin: true,
+  //     ws: true // important
+  //   }
+  // },
+  // watchOptions: {
+  //   // ignored: /node_modules/,
+  //   poll: 1000,
+  //   aggregateTimeout: 500,
+  //   ignored: /DumpStack\.log\.tmp/
+  // },
+  // node: {
+  //   fs: "empty",
+  //   net: "empty"
+  // },
   module: {
     rules: [
       {

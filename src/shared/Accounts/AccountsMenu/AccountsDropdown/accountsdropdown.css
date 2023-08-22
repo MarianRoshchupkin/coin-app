@@ -11,6 +11,10 @@
   border: 1px solid var(--grey4);
   border-radius: 7px;
   width: 100%;
+  transition: all .3s ease;
+}
+
+.buttonDesc {
   font-size: 16px;
   font-weight: 400;
   font-style: normal;

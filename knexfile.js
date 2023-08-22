@@ -1,11 +1,8 @@
 module.exports = {
-  client: "mysql",
+  client: "sqlite3",
+  useNullAsDefault: true,
   connection: {
-    host: 'sql9.freemysqlhosting.net',
-    port: '3306',
-    database: 'sql9638829',
-    user: 'sql9638829',
-    password: 'ETdmz4GCm8'
+    filename: './data/db.sqlite3'
   },
   migrations: {
     tableName: "knex_migrations",

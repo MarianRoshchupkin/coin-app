@@ -5,7 +5,7 @@ import { Button } from "../../Button";
 export function SignupButton() {
   return (
     <div className={styles.container}>
-      <Button link={''} text={'Вернуться назад'} />
+      <Button link={'/'} text={'Вернуться назад'} />
     </div>
   );
 }

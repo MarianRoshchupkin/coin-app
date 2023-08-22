@@ -6,16 +6,18 @@ interface IAccountFormProps {
 }
 
 export function AccountForm({ number }: IAccountFormProps) {
+  const NOOP = () => {};
+
   return (
     <form className={styles.form} method="post" action={`/transfer-funds`} encType="application/x-www-form-urlencoded">
-      <input style={{ display: "none" }} type="text" name="from" value={number} />
+      <input style={{ display: "none" }} type="text" name="from" value={number} onChange={NOOP} />
       <label className={styles.label}>
         <span className={styles.desc}>Номер счёта получателя</span>
-        <input className={`${styles.input} number`} type="text" name="to" maxLength={15} placeholder="Placeholder" />
+        <input className={`${styles.input} numberInput`} type="text" name="to" maxLength={15} placeholder="Placeholder" />
       </label>
       <label className={styles.label}>
         <span className={styles.desc}>Сумма перевода</span>
-        <input className={`${styles.input} sum`} type="text" name="sum" placeholder="Placeholder" />
+        <input className={`${styles.input} sumInput`} type="text" name="sum" placeholder="Placeholder" />
       </label>
       <button className={`${styles.button} formButton`}>
         <svg className={styles.icon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

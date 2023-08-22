@@ -4,6 +4,7 @@ import { Notification } from "../Notification";
 
 interface IUserProps {
   transferError?: string;
+  currencyError?: string;
 }
 
 interface IContentProps {
@@ -16,6 +17,9 @@ export function Content({ user, children }: IContentProps) {
     <main className={styles.content}>
       {user.transferError && (
         <Notification type={'error'} text={user.transferError} />
+      )}
+      {user.currencyError && (
+        <Notification type={'error'} text={user.currencyError} />
       )}
 
       { children }

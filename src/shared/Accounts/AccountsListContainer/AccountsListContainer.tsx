@@ -8,10 +8,8 @@ import { sortAccountsByBalance } from "../../../utils/sorting/sortAccountsByBala
 import { sortAccountsByTransaction } from "../../../utils/sorting/sortAccountsByTransaction";
 import { mergeAccountsAndLastTransactions } from "../../../utils/merging/mergeAccountAndLastTransaction";
 import { AccountsList } from "./AccountsList";
-import { Loader } from "../../Loader";
 
 export function AccountsListContainer() {
-  const accountsLoading = useSelector<IInitialState, boolean>(state => state.accounts.loading);
   const sortingType = useSelector<IInitialState, string>(state => state.sortingType.sortingType);
   let accounts: IAccount[] | [];
 
@@ -32,11 +30,6 @@ export function AccountsListContainer() {
   }
 
   return (
-    <div>
-      {accountsLoading
-        ? (<Loader />)
-        : (<AccountsList accounts={accounts} />)
-      }
-    </div>
+    <AccountsList accounts={accounts} />
   );
 }

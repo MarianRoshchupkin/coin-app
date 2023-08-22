@@ -1,16 +1,15 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, {ReactNode, useEffect, useRef} from 'react';
 import styles from './dropdown.css';
-import { useSelector, useDispatch } from "react-redux";
-import { IInitialState } from "../../store/reducer";
-import { setDropdownSwitcher } from "../../store/dropdownSwitcher/dropdownSwitcherActions";
+import { useDispatch } from "react-redux";
 
 interface IDropdownProps {
   button: ReactNode;
   children: ReactNode;
+  dropdownSwitcher: boolean;
+  setDropdownSwitcher: (dropdownSwitcher: boolean) => void;
 }
 
-export function Dropdown({ button, children }: IDropdownProps) {
-  const dropdownSwitcher = useSelector<IInitialState, boolean>(state => state.dropdownSwitcher.dropdownSwitcher);
+export function Dropdown({ button, children, dropdownSwitcher, setDropdownSwitcher }: IDropdownProps) {
   const dispatch = useDispatch();
 
   return (

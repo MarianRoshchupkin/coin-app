@@ -11,6 +11,16 @@ module.exports = {
     path: path.resolve(__dirname, "../dist/server"),
     filename: "server.js",
   },
+  // watchOptions: {
+  //   // ignored: /node_modules/,
+  //   poll: 1000,
+  //   aggregateTimeout: 500,
+  //   ignored: /DumpStack\.log\.tmp/
+  // },
+  // node: {
+  //   fs: "empty",
+  //   net: "empty"
+  // },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
   },

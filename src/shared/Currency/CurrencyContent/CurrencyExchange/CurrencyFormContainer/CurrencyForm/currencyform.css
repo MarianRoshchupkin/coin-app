@@ -1,0 +1,148 @@
+.form {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 0 25px 0 0;
+}
+
+.inputsContainerTop {
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 25px 0;
+}
+
+.labelTop {
+  display: flex;
+  align-items: center;
+}
+
+.labelTop:nth-child(1) {
+  margin: 0 20px 0 0;
+}
+
+.labelBottom {
+  display: flex;
+  align-items: center;
+}
+
+.desc {
+  display: inline-block;
+  margin: 0 20px 0 0;
+  font-family: 'Ubuntu', serif;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: -0.16px;
+  text-align: end;
+  color: var(--black);
+}
+
+.input {
+  padding: 7px 10px 8px 15px;
+  border: 1px solid var(--grey5);
+  border-radius: 7px;
+  width: 100%;
+  height: 44px;
+  font-size: 18px;
+  color: var(--black);
+  transition: all .3s ease;
+}
+
+.input::placeholder {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--grey4);
+}
+
+.input:hover {
+  border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
+  outline: none;
+}
+
+.input:active {
+  border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
+  outline: none;
+}
+
+.input:focus {
+  border: 1px solid var(--primary);
+  background-color: rgba(160, 195, 255, 0.10);
+  outline: none;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 25px;
+  margin: 0;
+  border-radius: 7px;
+  width: 104px;
+  height: 100%;
+  background-color: var(--primary);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.buttonDesc {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.16px;
+  color: var(--white);
+}
+
+.button:disabled {
+  background-color: var(--white) !important;
+  outline: 1px solid var(--primary) !important;
+  cursor: none !important;
+}
+
+.button:disabled .buttonDesc {
+  color: var(--primary);
+}
+
+.button:hover {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.button:hover .buttonDesc {
+  color: var(--primary);
+}
+
+.button:active {
+  background-color: var(--primary);
+  outline: none;
+}
+
+.button:active .buttonDesc {
+  color: var(--white);
+}
+
+.button:disabled:active {
+  background-color: var(--white) !important;
+  outline: 1px solid var(--primary) !important;
+  cursor: none !important;
+}
+
+.button:disabled:active .buttonDesc {
+  color: var(--primary);
+}
+
+.button:focus {
+  background-color: var(--white);
+  outline: 1px solid var(--primary);
+}
+
+.button:focus .buttonDesc {
+  color: var(--primary);
+}

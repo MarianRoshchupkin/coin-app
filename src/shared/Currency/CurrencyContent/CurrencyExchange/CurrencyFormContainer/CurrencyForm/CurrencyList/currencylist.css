@@ -1,0 +1,47 @@
+.list {
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 11px 0 9px 0;
+  border-radius: 7px;
+  background-color: var(--white);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .25);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  width: 100%;
+  color: var(--black);
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.desc {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 10px;
+}
+
+.link:hover {
+  background-color: #A0C3FF;
+}
+
+.link:active {
+  background-color: #A0C3FF;
+}
+
+.link:focus {
+  background-color: #A0C3FF;
+}

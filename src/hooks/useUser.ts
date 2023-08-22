@@ -11,6 +11,7 @@ export interface IUser {
   password: string;
   currentAccount: number;
   transferError: string;
+  currencyError: string;
   loginError: string;
   signupError: string;
   signupSuccess: string;

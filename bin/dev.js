@@ -7,13 +7,13 @@ const compiler = webpack(webpackConfig);
 
 compiler.run((err) => {
   if (err) {
-    console.log(`compilation failed:`, err);
+    console.log(`compilation's failed:`, err);
   }
   compiler.watch({}, (err) => {
     if (err) {
-      console.log(`compilation failed:`, err);
+      console.log(`compilation's failed:`, err);
     }
-    console.log("Compilation was successfully");
+    console.log("Compilation's been successful");
   });
 
   nodemon({

@@ -21,10 +21,10 @@ interface ICurrency {
   USD: boolean
 }
 
-export const generateInsertQueryForCurrencies = (id: string) => {
+export const generateInsertQueryForCurrencies = (userId: string) => {
   const currency: ICurrency = {
     id: generateRandomString(),
-    userId: id,
+    userId: userId,
     AUD: generateRandomTrueFalse(),
     BTC: generateRandomTrueFalse(),
     BYR: generateRandomTrueFalse(),

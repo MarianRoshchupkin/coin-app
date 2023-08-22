@@ -7,7 +7,7 @@ export function AccountTextContent() {
   return (
     <div className={styles.container}>
       <Title title={'Просмотр счёта'} />
-      <Button link={''} text={'Вернуться назад'} />
+      <Button link={'/'} text={'Вернуться назад'} />
     </div>
   );
 }

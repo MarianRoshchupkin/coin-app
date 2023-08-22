@@ -85,8 +85,8 @@ export function AccountFormContainer({ number }: IAccountFormContainerProps) {
   }
 
   useEffect(() => {
-    const numberInput: HTMLInputElement = document.querySelector('.number');
-    const sumInput: HTMLInputElement = document.querySelector('.sum');
+    const numberInput: HTMLInputElement = document.querySelector('.numberInput');
+    const sumInput: HTMLInputElement = document.querySelector('.sumInput');
 
     numberInput.addEventListener('input', handleNumberInput);
     sumInput.addEventListener('input', handleSumInput);
