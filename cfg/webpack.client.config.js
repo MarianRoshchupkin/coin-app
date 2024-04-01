@@ -9,10 +9,8 @@ function setupDevtool() {
   if (IS_DEV) return "eval";
   if (IS_PROD) return false;
 }
+
 module.exports = {
-  resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
-  },
   mode: NODE_ENV ? NODE_ENV : "development",
   entry: path.resolve(__dirname, "../src/client/index.jsx"),
   output: {
@@ -20,24 +18,9 @@ module.exports = {
     filename: "client.js",
     publicPath: "//localhost:3001/static",
   },
-  // devServer: {
-  //   proxy: {
-  //     context: '/websocket',
-  //     target: 'ws://localhost:3000',
-  //     changeOrigin: true,
-  //     ws: true // important
-  //   }
-  // },
-  // watchOptions: {
-  //   // ignored: /node_modules/,
-  //   poll: 1000,
-  //   aggregateTimeout: 500,
-  //   ignored: /DumpStack\.log\.tmp/
-  // },
-  // node: {
-  //   fs: "empty",
-  //   net: "empty"
-  // },
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+  },
   module: {
     rules: [
       {

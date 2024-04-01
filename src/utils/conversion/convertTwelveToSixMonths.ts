@@ -5,8 +5,10 @@ export const convertTwelveToSixMonths = () => {
   const month = date.split('.')[1];
 
   const monthsNumberIndex = monthsNumbers.findIndex((monthNumber) => monthNumber === month);
-  const halfYearMonths = months.slice(monthsNumberIndex - 5, monthsNumberIndex + 1);
-  const halfYearMonthsNumber = monthsNumbers.slice(monthsNumberIndex - 5, monthsNumberIndex + 1);
+  const monthsBefore = monthsNumberIndex < 5 ? monthsNumberIndex : 5;
+  const monthsAfter = monthsNumberIndex === 12 ? 0 : 1;
+  const halfYearMonths = months.slice(monthsNumberIndex - monthsBefore, monthsNumberIndex + monthsAfter);
+  const halfYearMonthsNumber = monthsNumbers.slice(monthsNumberIndex - monthsBefore, monthsNumberIndex + monthsAfter);
 
   return { halfYearMonths, halfYearMonthsNumber };
 }

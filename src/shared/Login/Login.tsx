@@ -16,12 +16,9 @@ interface ILoginProps {
 export function Login({ user }: ILoginProps) {
   return (
     <div className={styles.content}>
+      <Header navigation={false} />
       <div className={styles.container}>
-        {user.loginError && (
-          <Notification type={'error'} text={user.loginError} />
-        )}
-
-        <Header navigation={false} />
+        {user.loginError && <Notification type={'error'} text={user.loginError} />}
         <LoginForm />
       </div>
     </div>

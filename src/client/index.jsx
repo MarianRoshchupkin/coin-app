@@ -1,8 +1,7 @@
 import * as React from "react";
-import * as ReactDom from "react-dom";
+import { hydrateRoot } from "react-dom/client";
 import { App } from "../App.tsx";
 
-
-window.addEventListener("load", () => {
-  ReactDom.hydrate(<App />, document.getElementById("react_root"));
-});
+window.onload = () => {
+  hydrateRoot(document.getElementById("react_root"), <App />);
+};

@@ -36,7 +36,7 @@ $ npm run dev
 ## Author
 Marian Roshchupkin &lt;roshchupkin.marian@gmail.com&gt;
 
-Updated on: 23 August 2023
+Updated on: 18 March 2024
 
 ## License
 MIT - see [LICENSE](LICENSE)

@@ -1,8 +1,7 @@
 {
-  "homepage": "http://PikchaGameDev.github.io/react-deploy",
-  "name": "reactapp",
+  "homepage": "https://github.com/MarianRoshchupkin/coin-app",
+  "name": "coin-app",
   "version": "1.0.0",
-  "description": "",
   "main": "webpack.config.js",
   "scripts": {
     "db:drop": "knex migrate:rollback",
@@ -11,11 +10,8 @@
     "deploy": "gh-pages -d build:dev",
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development npm run db:migrate && node ./bin/dev.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cross-env NODE_ENV=development npm run db:migrate && node ./bin/dev.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.4",
     "@types/cookie": "^0.5.1",
@@ -36,13 +32,13 @@
     "nodemon": "^2.0.12",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
-    "react-dom": "^17.0.1",
+    "react-dom": "^18.2.0",
     "react-redux": "^7.2.9",
     "react-router-dom": "^6.10.0",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
-    "sqlite3": "^5.1.6",
+    "sqlite3": "^5.1.7",
     "webpack-node-externals": "^3.0.0",
     "ws": "^8.13.0"
   },

@@ -23,20 +23,18 @@ export function AccountBalance({ number }: IAccountBalanceProps) {
     <a className={styles.container} href={`/accounts/${number}/details`} >
       <Description text={'Динамика баланса'} />
       {data.datasets[0].data.every((value) => value === 0 || value === null)
-        ? (
+        ?
           <AccountGraphics
             data={data}
             options={noBalanceGraphicsOptions}
             plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
           />
-        )
-        : (
+        :
           <AccountGraphics
             data={data}
             options={balanceGraphicsOptions}
             plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
           />
-        )
       }
     </a>
   );

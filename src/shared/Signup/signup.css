@@ -5,5 +5,9 @@
 
 .container {
   position: relative;
-  padding: 144px 50px 50px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+  height: 100vh;
 }

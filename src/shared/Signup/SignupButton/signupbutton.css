@@ -1,4 +1,6 @@
 .container {
   position: absolute;
   top: 144px;
+  left: 0;
+  padding: 0 50px;
 }

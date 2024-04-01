@@ -82,14 +82,14 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
 
   if (username.length === 0 || password.length === 0) {
     return res.send(indexTemplate(ReactDOM.renderToString(
-        App()),
+      App()),
       JSON.stringify({ login: true, loginError: 'Введите логин/пароль' })
     ));
   }
 
   if (!user || user.password !== createHash(password)) {
     return res.send(indexTemplate(ReactDOM.renderToString(
-        App()),
+      App()),
       JSON.stringify({ login: true, loginError: 'Неверный логин/пароль' })
     ));
   }
