@@ -1,5 +1,5 @@
 {
-  "homepage": "https://github.com/MarianRoshchupkin/coin-app",
+  "homepage": "http://course-work.github.io/coin-app",
   "name": "coin-app",
   "version": "1.0.0",
   "main": "webpack.config.js",
@@ -62,7 +62,8 @@
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.3",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-env": "^0.8.0"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",
