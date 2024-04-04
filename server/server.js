@@ -1265,6 +1265,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.database = void 0;
 var express_1 = __importDefault(__webpack_require__(50));
+var react_1 = __importDefault(__webpack_require__(0));
 var server_1 = __importDefault(__webpack_require__(51));
 var App_tsx_1 = __webpack_require__(52);
 // import { indexTemplate } from './indexTemplate';
@@ -1349,7 +1350,7 @@ app.post("/login", body_parser_1.default.urlencoded({ extended: false }), functi
         switch (_b.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
             case 1:
@@ -1409,7 +1410,7 @@ app.post("/signup", body_parser_1.default.urlencoded({ extended: false }), funct
         switch (_b.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
             case 1:
@@ -1475,7 +1476,7 @@ app.post("/create-account", (0, apiMethods_1.auth)(), body_parser_1.default.urle
         switch (_a.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 number = (0, generateFifteenDigitNumber_1.generateFifteenDigitNumber)();
                 balance = (0, generateFiveDigitNumber_1.generateFiveDigitNumber)();
                 return [4 /*yield*/, (0, exports.database)('accounts')
@@ -1507,7 +1508,7 @@ app.post("/transfer-funds", (0, apiMethods_1.auth)(), body_parser_1.default.urle
         switch (_b.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, sum = _a.sum;
                 return [4 /*yield*/, (0, apiMethods_1.findAccountByAccount)(Number(from))];
             case 1:
@@ -1672,7 +1673,7 @@ app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlenc
         switch (_b.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, amount = _a.amount;
                 if (from.length === 0 || to.length === 0 || amount.length === 0) {
                     req.user.currencyError = 'Выберите валютные коды/введите сумму перевода';
@@ -1783,7 +1784,7 @@ app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlenc
 }); });
 app.get("/", (0, apiMethods_1.auth)(), function (req, res) {
     var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-    var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+    var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
             console.error('Error reading index.html', err);
@@ -1805,7 +1806,7 @@ app.get("/logout", (0, apiMethods_1.auth)(), function (req, res) { return __awai
         switch (_a.label) {
             case 0:
                 indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 return [4 /*yield*/, (0, apiMethods_1.deleteSession)(req.sessionId)];
             case 1:
                 _a.sent();
@@ -1825,7 +1826,7 @@ app.get("/logout", (0, apiMethods_1.auth)(), function (req, res) { return __awai
 }); });
 app.get("/signup", (0, apiMethods_1.auth)(), function (req, res) {
     var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-    var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+    var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
             console.error('Error reading index.html', err);
@@ -1919,7 +1920,7 @@ app.get("/banks-data", (0, apiMethods_1.auth)(), function (req, res) { return __
 }); });
 app.get("*", (0, apiMethods_1.auth)(), function (req, res) {
     var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-    var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
+    var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
             console.error('Error reading index.html', err);
