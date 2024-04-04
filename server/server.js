@@ -1348,7 +1348,7 @@ app.post("/login", body_parser_1.default.urlencoded({ extended: false }), functi
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
@@ -1408,7 +1408,7 @@ app.post("/signup", body_parser_1.default.urlencoded({ extended: false }), funct
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
@@ -1474,7 +1474,7 @@ app.post("/create-account", (0, apiMethods_1.auth)(), body_parser_1.default.urle
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 number = (0, generateFifteenDigitNumber_1.generateFifteenDigitNumber)();
                 balance = (0, generateFiveDigitNumber_1.generateFiveDigitNumber)();
@@ -1506,7 +1506,7 @@ app.post("/transfer-funds", (0, apiMethods_1.auth)(), body_parser_1.default.urle
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, sum = _a.sum;
                 return [4 /*yield*/, (0, apiMethods_1.findAccountByAccount)(Number(from))];
@@ -1671,7 +1671,7 @@ app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlenc
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, amount = _a.amount;
                 if (from.length === 0 || to.length === 0 || amount.length === 0) {
@@ -1782,7 +1782,7 @@ app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlenc
     });
 }); });
 app.get("/", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
     var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
@@ -1804,7 +1804,7 @@ app.get("/logout", (0, apiMethods_1.auth)(), function (req, res) { return __awai
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
                 appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
                 return [4 /*yield*/, (0, apiMethods_1.deleteSession)(req.sessionId)];
             case 1:
@@ -1824,7 +1824,7 @@ app.get("/logout", (0, apiMethods_1.auth)(), function (req, res) { return __awai
     });
 }); });
 app.get("/signup", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
     var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
@@ -1918,7 +1918,7 @@ app.get("/banks-data", (0, apiMethods_1.auth)(), function (req, res) { return __
     });
 }); });
 app.get("*", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/client/index.html");
+    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
     var appHtml = server_1.default.renderToString(React.createElement(App_tsx_1.App, null));
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
