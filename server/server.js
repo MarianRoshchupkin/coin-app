@@ -1268,20 +1268,19 @@ var express_1 = __importDefault(__webpack_require__(50));
 var react_1 = __importDefault(__webpack_require__(0));
 var server_1 = __importDefault(__webpack_require__(51));
 var App_tsx_1 = __webpack_require__(52);
-// import { indexTemplate } from './indexTemplate';
+var indexTemplate_1 = __webpack_require__(310);
 var generateRandomIndex_1 = __webpack_require__(37);
 var generateFiveDigitNumber_1 = __webpack_require__(49);
-var generateFifteenDigitNumber_1 = __webpack_require__(310);
-var apiMethods_1 = __webpack_require__(311);
-var ws_1 = __importDefault(__webpack_require__(315));
-var http = __importStar(__webpack_require__(316));
-var body_parser_1 = __importDefault(__webpack_require__(317));
-var cookie_1 = __importDefault(__webpack_require__(318));
-var cookie_parser_1 = __importDefault(__webpack_require__(319));
-var knex_1 = __importDefault(__webpack_require__(320));
-var fs_1 = __importDefault(__webpack_require__(321));
-var path_1 = __importDefault(__webpack_require__(322));
-var serialize_javascript_1 = __importDefault(__webpack_require__(323));
+var generateFifteenDigitNumber_1 = __webpack_require__(311);
+var apiMethods_1 = __webpack_require__(312);
+var ws_1 = __importDefault(__webpack_require__(316));
+var http = __importStar(__webpack_require__(317));
+var body_parser_1 = __importDefault(__webpack_require__(318));
+var cookie_1 = __importDefault(__webpack_require__(319));
+var cookie_parser_1 = __importDefault(__webpack_require__(320));
+var knex_1 = __importDefault(__webpack_require__(321));
+var fs_1 = __importDefault(__webpack_require__(322));
+var path_1 = __importDefault(__webpack_require__(323));
 exports.database = (0, knex_1.default)({
     client: "sqlite3",
     useNullAsDefault: true,
@@ -1294,7 +1293,7 @@ exports.database = (0, knex_1.default)({
 });
 var app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use("/static", express_1.default.static("./dist/client"));
+app.use("/static", express_1.default.static("./dist"));
 app.use((0, cookie_parser_1.default)());
 var server = http.createServer(app);
 var wss = new ws_1.default.Server({ clientTracking: false, noServer: true });
@@ -1345,108 +1344,45 @@ wss.on('connection', function (ws) { return __awaiter(void 0, void 0, void 0, fu
     });
 }); });
 app.post("/login", body_parser_1.default.urlencoded({ extended: false }), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml, _a, username, password, user, sessionId;
+    var _a, username, password, user, sessionId;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
             case 1:
                 user = _b.sent();
                 if (username.length === 0 || password.length === 0) {
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)({ login: true, loginError: 'Введите логин/пароль' }));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify({ login: true, loginError: 'Введите логин/пароль' })
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ login: true, loginError: 'Введите логин/пароль' })))];
                 }
                 if (!user || user.password !== (0, apiMethods_1.createHash)(password)) {
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)({ login: true, loginError: 'Неверный логин/пароль' }));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify({ login: true, loginError: 'Неверный логин/пароль' })
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ login: true, loginError: 'Неверный логин/пароль' })))];
                 }
                 return [4 /*yield*/, (0, apiMethods_1.createSession)(user.id)];
             case 2:
                 sessionId = _b.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)(user));
-                    res.cookie("sessionId", sessionId, { httpOnly: true }).send(finalHtml);
-                });
+                res
+                    .cookie("sessionId", sessionId, { httpOnly: true })
+                    .send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(user)));
                 return [2 /*return*/];
         }
     });
 }); });
 app.post("/signup", body_parser_1.default.urlencoded({ extended: false }), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml, _a, username, password, foundUsername, userId;
+    var _a, username, password, foundUsername, userId;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, username = _a.username, password = _a.password;
                 return [4 /*yield*/, (0, apiMethods_1.findUserByUsername)(username)];
             case 1:
                 foundUsername = _b.sent();
                 userId = (0, generateRandomIndex_1.generateRandomString)();
                 if (username.length === 0 || password.length === 0) {
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)({ signup: true, signupError: 'Придумайте логин/пароль' }));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify({ signup: true, signupError: 'Придумайте логин/пароль' })
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ signup: true, signupError: 'Придумайте логин/пароль' })))];
                 }
                 if (foundUsername && username === foundUsername.username) {
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)({ signup: true, signupError: 'Данный пользователь уже зарегистрирован' }));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify({ signup: true, signupError: 'Данный пользователь уже зарегистрирован' })
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ signup: true, signupError: 'Данный пользователь уже зарегистрирован' })))];
                 }
                 return [4 /*yield*/, (0, exports.database)('users')
                         .insert({
@@ -1456,27 +1392,16 @@ app.post("/signup", body_parser_1.default.urlencoded({ extended: false }), funct
                     })];
             case 2:
                 _b.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)({ signup: true, signupSuccess: 'Аккаунт успешно создан' }));
-                    res.send(finalHtml);
-                });
+                res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ signup: true, signupSuccess: 'Аккаунт успешно создан' })));
                 return [2 /*return*/];
         }
     });
 }); });
 app.post("/create-account", (0, apiMethods_1.auth)(), body_parser_1.default.urlencoded({ extended: false }), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml, number, balance;
+    var number, balance;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 number = (0, generateFifteenDigitNumber_1.generateFifteenDigitNumber)();
                 balance = (0, generateFiveDigitNumber_1.generateFiveDigitNumber)();
                 return [4 /*yield*/, (0, exports.database)('accounts')
@@ -1488,27 +1413,16 @@ app.post("/create-account", (0, apiMethods_1.auth)(), body_parser_1.default.urle
                     })];
             case 1:
                 _a.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                    res.send(finalHtml);
-                });
+                res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})));
                 return [2 /*return*/];
         }
     });
 }); });
 app.post("/transfer-funds", (0, apiMethods_1.auth)(), body_parser_1.default.urlencoded({ extended: false }), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml, _a, from, to, sum, currentAccount, foundAccount, currentAccountSum, currentAnotherAccountSum;
+    var _a, from, to, sum, currentAccount, foundAccount, currentAccountSum, currentAnotherAccountSum;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, sum = _a.sum;
                 return [4 /*yield*/, (0, apiMethods_1.findAccountByAccount)(Number(from))];
             case 1:
@@ -1519,88 +1433,23 @@ app.post("/transfer-funds", (0, apiMethods_1.auth)(), body_parser_1.default.urle
                 req.user.currentAccount = Number(from);
                 if (from.length === 0 || to.length === 0) {
                     req.user.transferError = 'Введите номер счёта получателя/сумму перевода';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (foundAccount === undefined) {
                     req.user.transferError = 'Указанного вами счёта не существует';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (Number(from) === foundAccount.number) {
                     req.user.transferError = 'Нельзя перевести средства со своего счёта на свой';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (Number(sum) < 10) {
                     req.user.transferError = 'Нельзя перевести меньше средств, чем 10 рублей';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (Number(sum) > currentAccount.balance) {
                     req.user.transferError = 'Нельзя перевести больше средств, чем есть на счёте';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 return [4 /*yield*/, (0, exports.database)('accounts')
                         .select()
@@ -1653,98 +1502,35 @@ app.post("/transfer-funds", (0, apiMethods_1.auth)(), body_parser_1.default.urle
                     })];
             case 9:
                 _b.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                    res.send(finalHtml);
-                });
+                res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})));
                 return [2 /*return*/];
         }
     });
 }); });
 app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlencoded({ extended: false }), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml, _a, from, to, amount, fromCurrency, exchangeRate;
+    var _a, from, to, amount, fromCurrency, exchangeRate;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
                 _a = req.body, from = _a.from, to = _a.to, amount = _a.amount;
                 if (from.length === 0 || to.length === 0 || amount.length === 0) {
                     req.user.currencyError = 'Выберите валютные коды/введите сумму перевода';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (from === to) {
                     req.user.currencyError = 'Нельзя конвертировать валюту в точно такую же';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 return [4 /*yield*/, (0, apiMethods_1.findCurrencyByCurrency)(req.user.id, from)];
             case 1:
                 fromCurrency = _b.sent();
                 if (fromCurrency === undefined) {
                     req.user.currencyError = 'Вы еще не приобрели выбранную вами конвертируемую валюту';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 if (Number(amount) > fromCurrency.amount) {
                     req.user.currencyError = 'Нельзя перевести больше средств, чем есть у вас в валюте';
-                    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                        if (err) {
-                            console.error('Error reading index.html', err);
-                            return res.status(404).end();
-                        }
-                        var finalHtml = htmlData
-                            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                        res.send(finalHtml);
-                    });
-                    // return res.send(indexTemplate(ReactDOM.renderToString(
-                    //   App()),
-                    //   JSON.stringify(req.user ? req.user : {})
-                    // ));
+                    return [2 /*return*/, res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})))];
                 }
                 return [4 /*yield*/, (0, exports.database)('exchange')
                         .select()
@@ -1768,79 +1554,27 @@ app.post("/currency-buy", (0, apiMethods_1.auth)(), body_parser_1.default.urlenc
                     })];
             case 5:
                 _b.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-                    res.send(finalHtml);
-                });
+                res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})));
                 return [2 /*return*/];
         }
     });
 }); });
 app.get("/", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-    var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
-    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-        if (err) {
-            console.error('Error reading index.html', err);
-            return res.status(404).end();
-        }
-        var finalHtml = htmlData
-            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
-        res.send(finalHtml);
-    });
-    // res.send(indexTemplate(ReactDOM.renderToString(
-    //   App()),
-    //   JSON.stringify(req.user ? req.user : {})
-    // ));
+    res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : {})));
 });
 app.get("/logout", (0, apiMethods_1.auth)(), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var indexPath, appHtml;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-                appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
-                return [4 /*yield*/, (0, apiMethods_1.deleteSession)(req.sessionId)];
+            case 0: return [4 /*yield*/, (0, apiMethods_1.deleteSession)(req.sessionId)];
             case 1:
                 _a.sent();
-                fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-                    if (err) {
-                        console.error('Error reading index.html', err);
-                        return res.status(404).end();
-                    }
-                    var finalHtml = htmlData
-                        .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-                        .replace('"__USER__"', (0, serialize_javascript_1.default)({ login: true }));
-                    res.clearCookie("sessionId").send(finalHtml);
-                });
+                res.clearCookie("sessionId").send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify({ login: true })));
                 return [2 /*return*/];
         }
     });
 }); });
 app.get("/signup", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
-    var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
-    fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
-        if (err) {
-            console.error('Error reading index.html', err);
-            return res.status(404).end();
-        }
-        var finalHtml = htmlData
-            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : { signup: true }));
-        res.send(finalHtml);
-    });
-    // res.send(indexTemplate(ReactDOM.renderToString(
-    //   App()),
-    //   JSON.stringify(req.user ? req.user : { signup: true })
-    // ));
+    res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)()), JSON.stringify(req.user ? req.user : { signup: true })));
 });
 app.get("/accounts-data", (0, apiMethods_1.auth)(), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var accounts;
@@ -1919,16 +1653,14 @@ app.get("/banks-data", (0, apiMethods_1.auth)(), function (req, res) { return __
     });
 }); });
 app.get("*", (0, apiMethods_1.auth)(), function (req, res) {
-    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
     var appHtml = server_1.default.renderToString(react_1.default.createElement(App_tsx_1.App, null));
+    var indexPath = path_1.default.resolve(__dirname, "../dist/index.html");
     fs_1.default.readFile(indexPath, 'utf8', function (err, htmlData) {
         if (err) {
             console.error('Error reading index.html', err);
             return res.status(404).end();
         }
-        var finalHtml = htmlData
-            .replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"))
-            .replace('"__USER__"', (0, serialize_javascript_1.default)(req.user ? req.user : {}));
+        var finalHtml = htmlData.replace('<div id="react_root"></div>', "<div id=\"react_root\">".concat(appHtml, "</div>"));
         res.send(finalHtml);
     });
     // res.send(indexTemplate(ReactDOM.renderToString(
@@ -8174,6 +7906,20 @@ module.exports = require("redux-thunk");
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.indexTemplate = void 0;
+var indexTemplate = function (content, user) {
+    return "\n  <!DOCTYPE html>\n  <html lang=\"ru\">\n  \n  <head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Coin</title>\n    <script src=\"/static/client.js\" type=\"application/javascript\"></script>\n    <script>\n      window.__user__ = JSON.parse('".concat(user, "');\n    </script>\n  </head>\n  \n  <body>\n    <div id=\"react_root\">").concat(content, "</div>\n  </body>\n  \n  </html>\n");
+};
+exports.indexTemplate = indexTemplate;
+
+
+/***/ }),
+/* 311 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateFifteenDigitNumber = void 0;
 var generateFifteenDigitNumber = function () {
     var max = Math.pow(10, 15);
@@ -8184,7 +7930,7 @@ exports.generateFifteenDigitNumber = generateFifteenDigitNumber;
 
 
 /***/ }),
-/* 311 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8231,10 +7977,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCurrenciesForUser = exports.fillCurrenciesWithData = exports.updateCurrenciesTable = exports.createHash = exports.deleteSession = exports.createSession = exports.findUserBySessionId = exports.findCurrencyByCurrency = exports.findAccountByAccount = exports.findUserByUsername = exports.auth = exports.sendCurrenciesExchangeToAllClients = exports.insertNewValuesForCurrenciesExchange = exports.getAllCurrenciesExchange = void 0;
 var generateRandomIndex_1 = __webpack_require__(37);
-var generateInsertQueryForCurrencies_1 = __webpack_require__(312);
+var generateInsertQueryForCurrencies_1 = __webpack_require__(313);
 var generateFiveDigitNumber_1 = __webpack_require__(49);
 var server_1 = __webpack_require__(38);
-var crypto_1 = __importDefault(__webpack_require__(314));
+var crypto_1 = __importDefault(__webpack_require__(315));
 var getAllCurrenciesExchange = function () { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
     return [2 /*return*/, (0, server_1.database)('exchange').select()];
 }); }); };
@@ -8500,7 +8246,7 @@ exports.getCurrenciesForUser = getCurrenciesForUser;
 
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8508,7 +8254,7 @@ exports.getCurrenciesForUser = getCurrenciesForUser;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateInsertQueryForCurrencies = void 0;
 var generateRandomIndex_1 = __webpack_require__(37);
-var generateRandomTrueFalse_1 = __webpack_require__(313);
+var generateRandomTrueFalse_1 = __webpack_require__(314);
 var generateInsertQueryForCurrencies = function (userId) {
     var currency = {
         id: (0, generateRandomIndex_1.generateRandomString)(),
@@ -8535,7 +8281,7 @@ exports.generateInsertQueryForCurrencies = generateInsertQueryForCurrencies;
 
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8547,64 +8293,58 @@ exports.generateRandomTrueFalse = generateRandomTrueFalse;
 
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, exports) {
 
 module.exports = require("crypto");
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, exports) {
 
 module.exports = require("ws");
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, exports) {
 
 module.exports = require("http");
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie");
 
 /***/ }),
-/* 319 */
+/* 320 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookie-parser");
 
 /***/ }),
-/* 320 */
+/* 321 */
 /***/ (function(module, exports) {
 
 module.exports = require("knex");
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 322 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
 /* 323 */
 /***/ (function(module, exports) {
 
-module.exports = require("serialize-javascript");
+module.exports = require("path");
 
 /***/ })
 /******/ ]);
