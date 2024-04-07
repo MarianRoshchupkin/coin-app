@@ -6,10 +6,10 @@
   "scripts": {
     "db:drop": "knex migrate:rollback",
     "db:migrate": "knex migrate:latest",
-    "predeploy": "npm run build:dev",
-    "deploy": "gh-pages -d build:dev",
-    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "predeploy": "npm run build:prod",
+    "deploy": "gh-pages -d dist",
+    "build:dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider/a webpack --config webpack.config.js",
+    "build:prod": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
     "dev": "cross-env NODE_ENV=development npm run db:migrate && node ./bin/dev.js"
   },
   "dependencies": {
@@ -38,12 +38,14 @@
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
+    "serialize-javascript": "^6.0.2",
     "sqlite3": "^5.1.7",
     "webpack-node-externals": "^3.0.0",
     "ws": "^8.13.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
+    "@types/eslint": "^8.56.7",
     "@types/jest": "^28.1.6",
     "@types/react": "^17.0.53",
     "@types/react-dom": "^18.0.11",
@@ -51,10 +53,11 @@
     "cross-env": "^7.0.3",
     "css-loader": "^3.4.2",
     "gh-pages": "^4.0.0",
-    "html-webpack-plugin": "^4.5.2",
+    "html-webpack-plugin": "^4.0.0",
     "jest": "^28.1.3",
     "less": "^3.13.1",
     "less-loader": "^5.0.0",
+    "react-styleguidist": "^13.1.2",
     "style-loader": "^1.1.3",
     "ts-jest": "^28.0.7",
     "ts-loader": "^6.2.1",

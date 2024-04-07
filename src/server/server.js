@@ -99,7 +99,7 @@ app.post("/login", bodyParser.urlencoded({ extended: false }), async (req, res) 
   res
     .cookie("sessionId", sessionId, { httpOnly: true })
     .send(indexTemplate(ReactDOM.renderToString(
-        App()),
+      App()),
       JSON.stringify(user)
     ));
 });
@@ -182,7 +182,7 @@ app.post("/transfer-funds", auth(), bodyParser.urlencoded({ extended: false }), 
     req.user.transferError = 'Нельзя перевести средства со своего счёта на свой';
 
     return res.send(indexTemplate(ReactDOM.renderToString(
-        App()),
+      App()),
       JSON.stringify(req.user ? req.user : {})
     ));
   }
