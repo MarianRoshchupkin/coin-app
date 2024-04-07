@@ -6,7 +6,7 @@ const chartAreaBorder = {
     ctx.save();
     ctx.beginPath();
     ctx.lineWidth = 1;
-    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.strokeStyle = '#000000';
     ctx.moveTo(left + 1, top);
     ctx.lineTo(right, top);
     ctx.lineTo(right, bottom);
@@ -31,7 +31,7 @@ const smallGraphicsTicksStyles = {
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
     ctx.font = "500 20px 'Work Sans', sans-serif";
-    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.strokeStyle = '#000000';
     ctx.fillText(yMinTickValue, xOffset, yMinPos - 10 );
     ctx.fillText(yMaxTickValue, xOffset, yMaxPos + 10 );
     x.ticks.forEach((tick, index, ticks) => {
@@ -42,7 +42,7 @@ const smallGraphicsTicksStyles = {
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'center';
       ctx.font = "700 20px 'Work Sans', sans-serif";
-      ctx.strokeStyle = 'rgb(255, 255, 255)';
+      ctx.strokeStyle = '#000000';
       ctx.fillText(value, xPos, yPos + 30);
     })
     ctx.restore();
@@ -64,7 +64,7 @@ const bigGraphicsTicksStyles = {
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
     ctx.font = "500 20px 'Work Sans', sans-serif";
-    ctx.strokeStyle = 'rgb(255, 255, 255)';
+    ctx.strokeStyle = '#000000';
     ctx.fillText(yMinTickValue, xOffset, yMinPos - 10 );
     ctx.fillText(yMaxTickValue, xOffset, yMaxPos + 10 );
     x.ticks.forEach((tick, index, ticks) => {
@@ -75,7 +75,7 @@ const bigGraphicsTicksStyles = {
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'center';
       ctx.font = "700 20px 'Work Sans', sans-serif";
-      ctx.strokeStyle = 'rgb(255, 255, 255)';
+      ctx.strokeStyle = '#000000';
       ctx.fillText(value, xPos, yPos + 30);
     })
     ctx.restore();
