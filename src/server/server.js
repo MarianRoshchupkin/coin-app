@@ -40,6 +40,7 @@ export const database = knex({
 })
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/static", express.static("./dist/client"));
@@ -391,6 +392,6 @@ app.get("*", auth(), (req, res) => {
   ));
 });
 
-server.listen(3000, () => {
-  console.log("server started on port http://localhost:3000");
+server.listen(PORT, () => {
+  console.log("......server started");
 });
