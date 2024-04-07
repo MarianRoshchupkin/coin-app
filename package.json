@@ -8,9 +8,9 @@
     "db:migrate": "knex migrate:latest",
     "predeploy": "npm run build:prod",
     "deploy": "gh-pages -d dist",
-    "build:dev": "cross-env NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider/a webpack --config webpack.config.js",
-    "build:prod": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
-    "dev": "cross-env NODE_ENV=development npm run db:migrate && node ./bin/dev.js"
+    "build:dev": "NODE_ENV=development NODE_OPTIONS=--openssl-legacy-provider/a webpack --config webpack.config.js",
+    "build:prod": "NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
+    "dev": "NODE_ENV=development npm run db:migrate && node ./bin/dev.js"
   },
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.4",
