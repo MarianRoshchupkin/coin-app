@@ -142,3 +142,21 @@
 .button:focus .icon path {
   fill: var(--primary);
 }
+
+/*------------------------------------- 1400 PX ------------------------------------*/
+@media (max-width: 1400px) {
+  .label {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .desc {
+    margin: 0 0 10px 0;
+    min-width: 0;
+  }
+
+  .button {
+    left: 0;
+    width: 100%;
+  }
+}

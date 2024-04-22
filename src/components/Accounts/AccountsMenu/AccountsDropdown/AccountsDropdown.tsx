@@ -22,14 +22,14 @@ export function AccountsDropdown() {
         dropdownSwitcher={dropdownSwitcher}
         setDropdownSwitcher={setSortingDropdownSwitcher}
         button={
-          <button className={styles.button} >
+          <button className={styles.button}>
             {type !== ''
-              ? (<span className={styles.buttonDesc}>{ type }</span>)
-              : (<span className={styles.buttonDesc}>Сортировка</span>)
+              ? <span className={styles.buttonDesc}>{ type }</span>
+              : <span className={styles.buttonDesc}>Сортировка</span>
             }
             {dropdownSwitcher
-              ? (<span className={styles.icon}><ArrowUpIcon size={24} /></span>)
-              : (<span className={styles.icon}><ArrowDownIcon size={24} /></span>)
+              ? <span className={styles.icon}><ArrowUpIcon size={24} /></span>
+              : <span className={styles.icon}><ArrowDownIcon size={24} /></span>
             }
           </button>
         }
@@ -40,9 +40,7 @@ export function AccountsDropdown() {
           type={type}
           setItemSwitcher={setSortingItemSwitcher}
           setType={setSortingType}
-          renderList={() => (
-            <AccountsList itemSwitcher={itemSwitcher} type={type} />
-          )}
+          renderList={() => <AccountsList itemSwitcher={itemSwitcher} type={type} />}
         />
       </Dropdown>
     </div>

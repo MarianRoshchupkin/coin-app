@@ -3,3 +3,24 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 50px 70px;
 }
+
+/*------------------------------------- 1200 PX ------------------------------------*/
+@media (max-width: 1200px) {
+  .list {
+    gap: 30px 40px;
+  }
+}
+
+/*------------------------------------- 768 PX ------------------------------------*/
+@media (max-width: 768px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*------------------------------------- 576 PX ------------------------------------*/
+@media (max-width: 576px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+}

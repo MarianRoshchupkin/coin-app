@@ -3,3 +3,10 @@
   overflow: hidden;
   background-color: var(--white);
 }
+
+/*------------------------------------- 768 PX ------------------------------------*/
+@media (max-width: 768px) {
+  .content {
+    padding: 120px 20px 20px 20px;
+  }
+}

@@ -6,7 +6,9 @@ import { CurrencyFormContainer } from "./CurrencyFormContainer";
 export function CurrencyExchange() {
   return (
     <div className={styles.container}>
-      <Description text={'Обмен валюты'} />
+      <div>
+        <Description text={'Обмен валюты'} />
+      </div>
       <CurrencyFormContainer />
     </div>
   );

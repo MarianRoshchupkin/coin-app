@@ -11,8 +11,8 @@ export function CurrencyExchangeRate() {
     <div className={styles.container}>
       <Description text={'Изменение курсов в реальном времени'} />
       {currenciesExchange !== null
-        ? (<CurrenciesPairsList currenciesExchange={currenciesExchange} />)
-        : (<CurrenciesPairsList currenciesExchange={[]} />)
+        ? <CurrenciesPairsList currenciesExchange={currenciesExchange} />
+        : <CurrenciesPairsList currenciesExchange={[]} />
       }
     </div>
   );

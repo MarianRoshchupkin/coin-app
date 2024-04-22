@@ -17,7 +17,18 @@
   align-items: center;
   margin: 0;
   width: 100%;
-  color: var(--secondary1);
   font-size: 14px;
   line-height: 20px;
+  color: var(--secondary1);
+}
+
+/*------------------------------------- 576 PX ------------------------------------*/
+@media (max-width: 576px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .balance {
+    font-size: 16px;
+  }
 }

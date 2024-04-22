@@ -21,3 +21,18 @@
 .container:focus {
   transform: scale(1.05);
 }
+
+/*------------------------------------- 1200 PX ------------------------------------*/
+@media (max-width: 1200px) {
+  .container {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+/*------------------------------------- 768 PX ------------------------------------*/
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 30px 50px 30px;
+  }
+}

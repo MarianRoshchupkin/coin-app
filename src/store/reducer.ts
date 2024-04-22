@@ -32,6 +32,12 @@ import { ITransactionsLoadCounterState, transactionsLoadCounterReducer } from ".
 import { SET_TRANSACTIONS_LOAD_COUNTER, SetTransactionsLoadCounterAction } from "./transactionsLoadCounter/transactionsLoadCounterActions";
 import { ITransactionsOffsetState, transactionsOffsetReducer } from "./transactionsOffset/transactionsOffsetReducer";
 import { SET_TRANSACTIONS_OFFSET, SetTransactionsOffsetAction } from "./transactionsOffset/transactionsOffsetActions";
+import { IMenuDropdownState, menuDropdownReducer } from "./menuDropdown/menuDropdownReducer";
+import { SET_MENU_DROPDOWN, SetMenuDropdownAction } from "./menuDropdown/menuDropdownActions";
+import { IMenuDropdownClickedState, menuDropdownClickedReducer } from "./menuDropdownClicked/menuDropdownClickedReducer";
+import { SET_MENU_DROPDOWN_CLICKED, SetMenuDropdownClickedAction } from "./menuDropdownClicked/menuDropdownClickedActions";
+import { IHistoryTableState, historyTableReducer } from "./historyTable/historyTableReducer";
+import { SET_HISTORY_TABLE, SetHistoryTableAction } from "./historyTable/historyTableActions";
 
 export interface IInitialState {
   user: IUserState;
@@ -44,6 +50,9 @@ export interface IInitialState {
   currencyFromDropdownSwitcher: ICurrencyFromDropdownSwitcherState;
   currencyToDropdownSwitcher: ICurrencyToDropdownSwitcherState;
   sortingItemSwitcher: ISortingItemSwitcherState;
+  menuDropdown: IMenuDropdownState;
+  menuDropdownClicked: IMenuDropdownClickedState;
+  historyTable: IHistoryTableState;
   currencyFromItemSwitcher: ICurrencyFromItemSwitcherState;
   currencyToItemSwitcher: ICurrencyToItemSwitcherState
   sortingType: ISortingTypeState;
@@ -90,6 +99,15 @@ export const initialState: IInitialState = {
   currencyToItemSwitcher: {
     currencyToItemSwitcher: false
   },
+  menuDropdown: {
+    menuDropdown: false
+  },
+  menuDropdownClicked: {
+    menuDropdownClicked: false
+  },
+  historyTable: {
+    historyTable: false
+  },
   sortingType: {
     sortingType: ''
   },
@@ -119,6 +137,9 @@ type Actions = SetUserAction
   | SetSortingItemSwitcherAction
   | SetCurrencyFromItemSwitcherAction
   | SetCurrencyToItemSwitcherAction
+  | SetMenuDropdownAction
+  | SetMenuDropdownClickedAction
+  | SetHistoryTableAction
   | SetSortingTypeAction
   | SetCurrencyFromTypeAction
   | SetCurrencyToTypeAction
@@ -186,6 +207,21 @@ export const rootReducer = (state = initialState, action: Actions): IInitialStat
       return {
         ...state,
         currencyToItemSwitcher: currencyToItemSwitcherReducer(state.currencyToItemSwitcher, action)
+      }
+    case SET_MENU_DROPDOWN:
+      return {
+        ...state,
+        menuDropdown: menuDropdownReducer(state.menuDropdown, action)
+      }
+    case SET_MENU_DROPDOWN_CLICKED:
+      return {
+        ...state,
+        menuDropdownClicked: menuDropdownClickedReducer(state.menuDropdownClicked, action)
+      }
+    case SET_HISTORY_TABLE:
+      return {
+        ...state,
+        historyTable: historyTableReducer(state.historyTable, action)
       }
     case SET_SORTING_TYPE:
       return {

@@ -58,3 +58,14 @@
 .link:focus .icon path {
   fill: var(--primary);
 }
+
+/*------------------------------------- 576 PX ------------------------------------*/
+@media (max-width: 576px) {
+  .link {
+    padding: 8px 12px;
+  }
+
+  .desc {
+    font-size: 12px;
+  }
+}

@@ -54,11 +54,10 @@ function AppComponent() {
             <Header navigation={true} />
             <Content user={user}>
               <Routes>
-                {Object.keys(user).length === 0 && (
-                  <Route path='/signup' element={<Navigate to='/accounts' replace />} />
-                ) || (
-                  <Route path='/login' element={<Navigate to='/accounts' replace />} />
-                )}
+                {Object.keys(user).length === 0 
+                  && <Route path='/signup' element={<Navigate to='/accounts' replace />} />
+                  || <Route path='/login' element={<Navigate to='/accounts' replace />} />
+                }
                 <Route path='/' element={<Navigate to='/accounts' replace />} />
                 <Route path='/signup' element={<Navigate to='/accounts' replace />} />
                 <Route path='/logout' element={<Navigate to='/login' replace />} />

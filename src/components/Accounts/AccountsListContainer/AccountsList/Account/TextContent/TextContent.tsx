@@ -12,11 +12,7 @@ export function TextContent({ number, balance }: ITextContentProps) {
     <div className={styles.container}>
       <h3 className={styles.title}>{number}</h3>
       <p className={styles.balance}>
-        {balance ? (
-          <span>{balance}</span>
-        ) : (
-          <span>0</span>
-        )}
+        {balance ? balance : 0}
         <RubleIcon size={12} />
       </p>
     </div>

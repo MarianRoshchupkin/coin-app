@@ -46,3 +46,10 @@
 .link:focus {
   background-color: #A0C3FF;
 }
+
+/*------------------------------------- 992 PX ------------------------------------*/
+@media (max-width: 992px) {
+  .desc {
+    font-size: 13px;
+  }
+}

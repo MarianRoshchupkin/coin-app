@@ -5,3 +5,10 @@
   border-radius: 50px;
   background-color: var(--background);
 }
+
+/*------------------------------------- 576 PX ------------------------------------*/
+@media (max-width: 576px) {
+  .container {
+    padding: 30px 30px 50px 30px;
+  }
+}

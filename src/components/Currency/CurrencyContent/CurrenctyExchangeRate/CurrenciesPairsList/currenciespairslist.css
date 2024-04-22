@@ -7,7 +7,7 @@
 .line {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .line:not(:last-child) {
@@ -19,7 +19,6 @@
   font-family: 'Work Sans', sans-serif;
   font-size: 20px;
   font-weight: 600;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 2px;
 }
@@ -52,7 +51,6 @@
   font-family: 'Work Sans', sans-serif;
   font-size: 20px;
   font-weight: 400;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 2px;
 }
@@ -67,8 +65,18 @@
   font-family: 'Work Sans', sans-serif;
   font-size: 20px;
   font-weight: 400;
-  font-style: normal;
   line-height: normal;
   letter-spacing: 2px;
   color: var(--black);
+}
+
+/*------------------------------------- 576 PX ------------------------------------*/
+@media (max-width: 576px) {
+  .currency {
+    font-size: 16px;
+  }
+
+  .amount {
+    font-size: 16px;
+  }
 }

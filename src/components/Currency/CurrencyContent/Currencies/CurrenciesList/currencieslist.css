@@ -41,3 +41,14 @@
   line-height: normal;
   letter-spacing: 2px;
 }
+
+/*------------------------------------- 768 PX ------------------------------------*/
+@media (max-width: 768px) {
+  .currency {
+    font-size: 16px;
+  }
+
+  .value {
+    font-size: 16px;
+  }
+}

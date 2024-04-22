@@ -24,12 +24,12 @@ export function CurrencyLeftDropdown() {
         button={
           <button className={styles.button} type="button">
             {type !== ''
-              ? (<span className={styles.buttonDesc}>{ type }</span>)
-              : (<span className={styles.buttonDesc}>...</span>)
+              ? <span className={styles.buttonDesc}>{ type }</span>
+              : <span className={styles.buttonDesc}>...</span>
             }
             {dropdownSwitcher
-              ? (<span className={styles.icon}><ArrowUpIcon size={24} /></span>)
-              : (<span className={styles.icon}><ArrowDownIcon size={24} /></span>)
+              ? <span className={styles.icon}><ArrowUpIcon size={24} /></span>
+              : <span className={styles.icon}><ArrowDownIcon size={24} /></span>
             }
           </button>
         }
@@ -40,13 +40,13 @@ export function CurrencyLeftDropdown() {
           type={type}
           setItemSwitcher={setCurrencyFromItemSwitcher}
           setType={setCurrencyFromType}
-          renderList={() => (
+          renderList={() =>
             <CurrencyList
               currencyClass={'currencyLeftItem'}
               itemSwitcher={itemSwitcher}
               type={type}
             />
-          )}
+          }
         />
       </Dropdown>
     </div>

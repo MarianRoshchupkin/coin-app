@@ -10,10 +10,8 @@ export function AccountsMenu() {
 
   return (
     <div className={styles.menu}>
-      <Title title={'Ваши счета'} />
-      {accounts.length !== 0 && (
-        <AccountsDropdown />
-      )}
+      <Title title='Ваши счета' />
+      {accounts.length !== 0 && <AccountsDropdown />}
       <AccountsButton />
     </div>
   );

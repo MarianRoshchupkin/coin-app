@@ -10,10 +10,7 @@ export function AccountBalance({ balance }: IAccountViewMenuDetailsTextProps) {
   return (
     <p className={styles.balance}>
       Баланс
-      <span className={styles.number}>
-        { balance }
-        <RubleIcon size={18} />
-      </span>
+      <span className={styles.number}>{balance}<RubleIcon size={18} /></span>
     </p>
   );
 }

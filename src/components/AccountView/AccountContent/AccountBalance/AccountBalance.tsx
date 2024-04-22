@@ -21,16 +21,16 @@ export function AccountBalance({ number }: IAccountBalanceProps) {
 
   return (
     <a className={styles.container} href={`/accounts/${number}/details`} >
-      <Description text={'Динамика баланса'} />
+      <div className={styles.description}>
+        <Description text={'Динамика баланса'} />
+      </div>
       {data.datasets[0].data.every((value) => value === 0 || value === null)
-        ?
-          <AccountGraphics
+        ? <AccountGraphics
             data={data}
             options={noBalanceGraphicsOptions}
             plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
           />
-        :
-          <AccountGraphics
+        : <AccountGraphics
             data={data}
             options={balanceGraphicsOptions}
             plugins={[chartAreaBorder, smallGraphicsTicksStyles]}
