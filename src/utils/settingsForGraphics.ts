@@ -30,7 +30,7 @@ const smallGraphicsTicksStyles = {
     ctx.save();
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
-    ctx.font = "500 20px 'Work Sans', sans-serif";
+    ctx.font = "500 16px 'Work Sans', sans-serif";
     ctx.strokeStyle = '#000000';
     ctx.fillText(yMinTickValue, xOffset, yMinPos - 10 );
     ctx.fillText(yMaxTickValue, xOffset, yMaxPos + 10 );
@@ -41,7 +41,7 @@ const smallGraphicsTicksStyles = {
 
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'center';
-      ctx.font = "700 20px 'Work Sans', sans-serif";
+      ctx.font = "700 16px 'Work Sans', sans-serif";
       ctx.strokeStyle = '#000000';
       ctx.fillText(value, xPos, yPos + 30);
     })
@@ -63,7 +63,7 @@ const bigGraphicsTicksStyles = {
     ctx.save();
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'left';
-    ctx.font = "500 20px 'Work Sans', sans-serif";
+    ctx.font = "500 16px 'Work Sans', sans-serif";
     ctx.strokeStyle = '#000000';
     ctx.fillText(yMinTickValue, xOffset, yMinPos - 10 );
     ctx.fillText(yMaxTickValue, xOffset, yMaxPos + 10 );
@@ -74,7 +74,7 @@ const bigGraphicsTicksStyles = {
 
       ctx.textBaseline = 'bottom';
       ctx.textAlign = 'center';
-      ctx.font = "700 20px 'Work Sans', sans-serif";
+      ctx.font = "700 16px 'Work Sans', sans-serif";
       ctx.strokeStyle = '#000000';
       ctx.fillText(value, xPos, yPos + 30);
     })
