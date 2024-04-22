@@ -20,7 +20,7 @@ export function AccountBalance({ number }: IAccountBalanceProps) {
   const data = convertDataForBalanceGraphics(number, halfYearMonths, halfYearMonthsNumber);
 
   return (
-    <a className={styles.container} href={`/accounts/${number}/details`} >
+    <a className={styles.container}>
       <div className={styles.description}>
         <Description text={'Динамика баланса'} />
       </div>

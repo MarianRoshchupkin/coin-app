@@ -11,7 +11,7 @@ interface IAccountHistoryProps {
 
 export function AccountHistory({ transactions, number }: IAccountHistoryProps) {
   return (
-    <a className={styles.container} href={`/accounts/${number}/details`} >
+    <a className={styles.container}>
       <Description text={'История переводов'} />
       <AccountTable transactions={transactions} number={number} />
     </a>

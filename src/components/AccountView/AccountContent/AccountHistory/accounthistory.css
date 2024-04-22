@@ -9,7 +9,7 @@
   transition: all .3s ease;
 }
 
-.container:hover {
+/* .container:hover {
   transform: scale(1.05);
 }
 
@@ -19,7 +19,7 @@
 
 .container:focus {
   transform: scale(1.05);
-}
+} */
 
 /*------------------------------------- 992 PX ------------------------------------*/
 @media (max-width: 992px) {

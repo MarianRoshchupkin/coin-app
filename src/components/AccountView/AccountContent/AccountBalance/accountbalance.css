@@ -11,7 +11,7 @@
   transition: all .3s ease;
 }
 
-.container:hover {
+/* .container:hover {
   transform: scale(1.05);
 }
 
@@ -21,7 +21,7 @@
 
 .container:focus {
   transform: scale(1.05);
-}
+} */
 
 /*------------------------------------- 1200 PX ------------------------------------*/
 @media (max-width: 1200px) {
